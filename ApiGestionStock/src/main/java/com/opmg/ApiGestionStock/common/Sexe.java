@@ -1,4 +1,4 @@
-package com.opmg.ApiGestionStock.client;
+package com.opmg.ApiGestionStock.common;
 
 public enum Sexe {
     MASCULIN, FEMININ

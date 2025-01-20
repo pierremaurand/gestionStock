@@ -1,5 +1,6 @@
 package com.opmg.ApiGestionStock.client;
 
+import com.opmg.ApiGestionStock.common.Sexe;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

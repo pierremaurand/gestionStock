@@ -14,5 +14,4 @@ import java.util.List;
 public class RoleResponse {
     private Long id;
     private String name;
-    private List<String> privileges;
 }

@@ -9,9 +9,6 @@ public record RoleRequest(
         Long id,
         @NotNull(message = "500")
         @NotEmpty(message = "500")
-        String name,
-        @NotNull(message = "501")
-        @NotEmpty(message = "501")
-        List<Long> privileges
+        String name
 ) {
 }

@@ -1,6 +1,6 @@
 package com.opmg.ApiGestionStock.client;
 
-import jakarta.persistence.Column;
+import com.opmg.ApiGestionStock.common.Sexe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -15,7 +15,6 @@ public class RoleMapper {
         return RoleResponse.builder()
                 .id(role.getId())
                 .name(role.getName())
-                .privileges(role.getPrivilegeNames())
                 .build();
     }
 }

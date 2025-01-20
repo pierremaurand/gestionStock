@@ -4,8 +4,6 @@ import com.opmg.ApiGestionStock.common.PageResponse;
 import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
 import com.opmg.ApiGestionStock.handler.BusinessErrorCodes;
-import com.opmg.ApiGestionStock.privilege.Privilege;
-import com.opmg.ApiGestionStock.privilege.PrivilegeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -24,7 +22,6 @@ import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.ROLE_NOT_FOUND
 public class RoleService {
     private final RoleRepository roleRepository;
     private final RoleMapper roleMapper;
-    private final PrivilegeRepository privilegeRepository;
 
     public Long save(RoleRequest request) {
         boolean exists = roleRepository.existsByName(request.name());
@@ -32,11 +29,7 @@ public class RoleService {
             log.error("Role already exists in the data base");
             throw new InvalidEntityException(BusinessErrorCodes.ROLE_ALREADY_EXISTS);
         }
-        Role role = roleMapper.toRole(request);
-        List<Privilege> privileges = privilegeRepository.findAllById(request.privileges())
-                .stream().toList();
-        role.setPrivileges(privileges);
-        return roleRepository.save(role).getId();
+        return roleRepository.save(roleMapper.toRole(request)).getId();
     }
 
     public PageResponse<RoleResponse> findAll(int page, int size) {
@@ -63,5 +56,11 @@ public class RoleService {
         return roleRepository.findByName(name)
                 .map(roleMapper::toRoleResponse)
                 .orElseThrow(() -> new EntityNotFoundException(ROLE_NOT_FOUND));
+    }
+
+    public void init() {
+        if(roleRepository.findAll().isEmpty()) {
+            roleRepository.saveAll(List.of(Role.builder().name("USER").build(), Role.builder().name("ADMIN").build()));
+        }
     }
 }

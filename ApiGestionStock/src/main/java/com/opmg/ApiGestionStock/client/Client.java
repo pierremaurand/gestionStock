@@ -3,6 +3,7 @@ package com.opmg.ApiGestionStock.client;
 
 import com.opmg.ApiGestionStock.common.BaseEntity;
 import com.opmg.ApiGestionStock.commandeClient.CommandeClient;
+import com.opmg.ApiGestionStock.common.Sexe;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

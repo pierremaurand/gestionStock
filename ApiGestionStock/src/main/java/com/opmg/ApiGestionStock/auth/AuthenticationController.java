@@ -1,6 +1,7 @@
 package com.opmg.ApiGestionStock.auth;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,5 +24,11 @@ public class AuthenticationController {
                         .token(authenticationService.verify(request))
                         .build()
         );
+    }
+
+    @PostMapping("register")
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request){
+        authenticationService.register(request);
+        return ResponseEntity.accepted().build();
     }
 }
