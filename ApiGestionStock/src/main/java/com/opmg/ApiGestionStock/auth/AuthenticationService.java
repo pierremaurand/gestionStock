@@ -32,29 +32,12 @@ public class AuthenticationService {
 
     public String verify(AuthenticationRequest request) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.username(), request.password())
+                new UsernamePasswordAuthenticationToken(request.login(), request.motDePasse())
         );
 
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(request.username());
+            return jwtService.generateToken(request.login());
         }
         return "Fail";
-    }
-
-    public void register(RegisterRequest request) {
-        if(utilisateurRepository.existsByUsername(request.username())) {
-            log.error("This username is already use USERNAME::{}", request.username());
-            throw new InvalidEntityException(USERNAME_ALREADY_EXISTS);
-        }
-
-        Role userRole = roleRepository.findByName("USER")
-                .orElseThrow(()->new EntityNotFoundException(ROLE_NOT_FOUND));
-
-        Utilisateur utilisateur = Utilisateur.builder()
-                .username(request.username())
-                .password(passwordEncoder.encode(request.password()))
-                .roles(List.of(userRole))
-                .build();
-        utilisateurRepository.save(utilisateur);
     }
 }

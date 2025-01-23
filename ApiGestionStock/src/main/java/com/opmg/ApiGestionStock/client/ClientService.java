@@ -1,11 +1,9 @@
 package com.opmg.ApiGestionStock.client;
 
-import com.opmg.ApiGestionStock.categorie.Categorie;
-import com.opmg.ApiGestionStock.categorie.CategorieResponse;
 import com.opmg.ApiGestionStock.common.PageResponse;
 import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
-import com.opmg.ApiGestionStock.handler.BusinessErrorCodes;
+import com.opmg.ApiGestionStock.file.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -13,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,22 +21,23 @@ import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.*;
 @RequiredArgsConstructor
 @Slf4j
 public class ClientService {
-    private final ClientRepository clientRepository;
-    private final ClientMapper clientMapper;
+    private final ClientRepository repository;
+    private final ClientMapper mapper;
+    private final FileStorageService fileStorageService;
 
     public Long save(ClientRequest request) {
-        boolean exists = clientRepository.existsByNumeroCNIOrNumeroTelOrEmail(request.numeroCNI(), request.numeroTel(), request.email());
+        boolean exists = repository.existsByNumeroCNIOrNumeroTelOrEmail(request.numeroCNI(), request.numeroTel(), request.email());
         if (exists) {
             log.error("Client already exist {}", request);
             throw new InvalidEntityException(CLIENT_ALREADY_EXISTS);
         }
-        return clientRepository.save(clientMapper.toClient(request)).getId();
+        return repository.save(mapper.toClient(request)).getId();
     }
 
     public PageResponse<ClientResponse> findAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
-        Page<Client> clients = clientRepository.findAll(pageable);
-        List<ClientResponse> clientsResponse = clients.stream().map(clientMapper::toClientResponse).toList();
+        Page<Client> clients = repository.findAll(pageable);
+        List<ClientResponse> clientsResponse = clients.stream().map(mapper::toClientResponse).toList();
         return new PageResponse<>(
                 clientsResponse,
                 clients.getNumber(),
@@ -49,26 +49,45 @@ public class ClientService {
     }
 
     public ClientResponse findById(Long clientId) {
-        return clientRepository.findById(clientId)
-                .map(clientMapper::toClientResponse)
+        return repository.findById(clientId)
+                .map(mapper::toClientResponse)
                 .orElseThrow(() -> new EntityNotFoundException(CLIENT_NOT_FOUND));
     }
 
     public ClientResponse findByNumeroCNI(String numeroCNI) {
-        return clientRepository.findByNumeroCNI(numeroCNI)
-                .map(clientMapper::toClientResponse)
+        return repository.findByNumeroCNI(numeroCNI)
+                .map(mapper::toClientResponse)
                 .orElseThrow(() -> new EntityNotFoundException(CLIENT_NOT_FOUND));
     }
 
     public ClientResponse findByNumeroTel(String numeroTel) {
-        return clientRepository.findByNumeroTel(numeroTel)
-                .map(clientMapper::toClientResponse)
+        return repository.findByNumeroTel(numeroTel)
+                .map(mapper::toClientResponse)
                 .orElseThrow(() -> new EntityNotFoundException(CLIENT_NOT_FOUND));
     }
 
     public ClientResponse findByEmail(String email) {
-        return clientRepository.findByEmail(email)
-                .map(clientMapper::toClientResponse)
+        return repository.findByEmail(email)
+                .map(mapper::toClientResponse)
+                .orElseThrow(() -> new EntityNotFoundException(CLIENT_NOT_FOUND));
+    }
+
+    public void delete(Long id){
+        Client client = getClientById(id);
+        if(client.getCommandeClients().isEmpty()){
+            repository.deleteById(id);
+        }
+    }
+
+    public void savePhoto(MultipartFile file, Long id) {
+        Client client = getClientById(id);
+        var photo = fileStorageService.saveFile(file, "client", String.valueOf(id));
+        client.setPhoto(photo);
+        repository.save(client);
+    }
+
+    public Client getClientById(Long id){
+        return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(CLIENT_NOT_FOUND));
     }
 }

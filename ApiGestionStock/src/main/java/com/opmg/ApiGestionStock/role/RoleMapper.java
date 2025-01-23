@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 public class RoleMapper {
     public Role toRole(RoleRequest request) {
         return Role.builder()
-                .id(request.id())
                 .name(request.name())
                 .build();
     }

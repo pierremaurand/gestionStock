@@ -17,13 +17,12 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Utilisateur extends BaseEntity {
-    private String firstName;
-    private String lastName;
+    private String nom;
     @Column(unique = true)
-    private String username;
-    private String password;
+    private String login;
+    private String motDePasse;
     private Sexe sexe;
-    private String picture;
+    private String photo;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

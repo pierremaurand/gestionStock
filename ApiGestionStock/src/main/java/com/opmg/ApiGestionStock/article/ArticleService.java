@@ -1,9 +1,7 @@
 package com.opmg.ApiGestionStock.article;
 
 import com.opmg.ApiGestionStock.categorie.Categorie;
-import com.opmg.ApiGestionStock.categorie.CategorieRepository;
-import com.opmg.ApiGestionStock.categorie.CategorieRequest;
-import com.opmg.ApiGestionStock.categorie.CategorieResponse;
+import com.opmg.ApiGestionStock.categorie.CategorieService;
 import com.opmg.ApiGestionStock.common.PageResponse;
 import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
@@ -21,34 +19,31 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.ARTICLE_NOT_FOUND;
-import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.CATEGORIE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ArticleService {
-    private final ArticleRepository articleRepository;
-    private final CategorieRepository categorieRepository;
+    private final ArticleRepository repository;
+    private final ArticleMapper mapper;
     private final FileStorageService fileStorageService;
-    private final ArticleMapper articleMapper;
+    private final CategorieService categorieService;
 
     public Long save(ArticleRequest request) {
-        boolean exists = articleRepository.existsByCode(request.code());
-        if (exists) {
+        if (repository.existsByCode(request.code())) {
             log.error("Article already exists in the data base");
             throw new InvalidEntityException(BusinessErrorCodes.CODE_ARTICLE_ALREADY_EXISTS);
         }
-        Categorie categorie = categorieRepository.findById(request.categorieId())
-                .orElseThrow(() -> new EntityNotFoundException(CATEGORIE_NOT_FOUND));
-        Article article = articleMapper.toArticle(request);
+        Categorie categorie = categorieService.getCategorieById(request.categorie());
+        Article article = mapper.toArticle(request);
         article.setCategorie(categorie);
-        return articleRepository.save(article).getId();
+        return repository.save(article).getId();
     }
 
     public PageResponse<ArticleResponse> findAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
-        Page<Article> articles = articleRepository.findAll(pageable);
-        List<ArticleResponse> articlesResponse = articles.stream().map(articleMapper::toArticleResponse).toList();
+        Page<Article> articles = repository.findAll(pageable);
+        List<ArticleResponse> articlesResponse = articles.stream().map(mapper::toArticleResponse).toList();
         return new PageResponse<>(
                 articlesResponse,
                 articles.getNumber(),
@@ -59,23 +54,55 @@ public class ArticleService {
         );
     }
 
-    public ArticleResponse findById(Long articleId) {
-        return articleRepository.findById(articleId)
-                .map(articleMapper::toArticleResponse)
-                .orElseThrow(() -> new EntityNotFoundException(ARTICLE_NOT_FOUND));
+    public ArticleResponse findById(Long id) {
+        return mapper.toArticleResponse(getArticleById(id));
     }
 
     public ArticleResponse findByCode(String code) {
-        return articleRepository.findByCode(code)
-                .map(articleMapper::toArticleResponse)
+        return mapper.toArticleResponse(getArticleByCode(code));
+    }
+
+    public void savePhoto(MultipartFile file, Long id) {
+        Article article = getArticleById(id);
+        var photo = fileStorageService.saveFile(file, "article", String.valueOf(id));
+        article.setPhoto(photo);
+        repository.save(article);
+    }
+
+    public PageResponse<ArticleResponse> findAllByCategorieId(int page, int size, Long id){
+        Categorie categorie = categorieService.getCategorieById(id);
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
+        Page<Article> articles = repository.findAllByIdIn(categorie.getArticlesIds(), pageable);
+        List<ArticleResponse> articleResponses = articles.stream().map(mapper::toArticleResponse).toList();
+        return new PageResponse<>(
+                articleResponses,
+                articles.getNumber(),
+                articles.getSize(),
+                articles.getTotalElements(),
+                articles.isFirst(),
+                articles.isLast()
+        );
+    }
+
+    public void delete(Long id){
+        Article article = getArticleById(id);
+        if(article.getMouvementStocksIds().isEmpty()
+        && article.getLigneCommandeClientsIds().isEmpty()
+        && article.getLigneCommandeFournisseursIds().isEmpty()
+        && article.getLigneVentes().isEmpty()){
+            repository.deleteById(id);
+        }
+    }
+
+    public Article getArticleById(Long id){
+        return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(ARTICLE_NOT_FOUND));
     }
 
-    public void uploadPicture(MultipartFile file, Long articleId) {
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow();
-        var photo = fileStorageService.saveFile(file, "article", String.valueOf(articleId));
-        article.setPhoto(photo);
-        articleRepository.save(article);
+    public Article getArticleByCode(String code){
+        return repository.findByCode(code)
+                .orElseThrow(() -> new EntityNotFoundException(ARTICLE_NOT_FOUND));
     }
+
+
 }

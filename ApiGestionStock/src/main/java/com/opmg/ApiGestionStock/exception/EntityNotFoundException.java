@@ -20,5 +20,6 @@ public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException(BusinessErrorCodes code) {
         super(code.getDescription());
         this.code = code.getCode();
+        this.httpStatus = code.getHttpStatus();
     }
 }

@@ -1,16 +1,21 @@
 package com.opmg.ApiGestionStock.commandeFournisseur;
 
+import com.opmg.ApiGestionStock.fournisseur.FournisseurMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Service
+@RequiredArgsConstructor
 public class CommandeFournisseurMapper {
+    private final FournisseurMapper fournisseurMapper;
+
     public CommandeFournisseur toCommandeFournisseur(CommandeFournisseurRequest request) {
         return CommandeFournisseur.builder()
-                .id(request.id())
                 .code(request.code())
-                .dateCommande(LocalDate.parse(request.dateCommande()))
+                .dateCommande(request.dateCommande())
+                .etatCommande(request.etatCommande())
                 .build();
     }
 
@@ -19,7 +24,8 @@ public class CommandeFournisseurMapper {
                 .id(commandeFournisseur.getId())
                 .code(commandeFournisseur.getCode())
                 .dateCommande(commandeFournisseur.getDateCommande())
-                .fournisseur(commandeFournisseur.getFournisseurId())
+                .etatCommande(commandeFournisseur.getEtatCommande())
+                .fournisseur(fournisseurMapper.toFournisseurResponse(commandeFournisseur.getFournisseur()))
                 .build();
     }
 }

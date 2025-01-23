@@ -22,34 +22,49 @@ public class ArticleController {
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<ArticleResponse>> findAllCategories(
+    public ResponseEntity<PageResponse<ArticleResponse>> findAll(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
     ) {
         return ResponseEntity.ok(service.findAll(page, size));
     }
 
-    @GetMapping("/id/{article-id}")
+    @GetMapping("/filtre/id/{id}")
     public ResponseEntity<ArticleResponse> findById(
-            @PathVariable("article-id") Long articleId
+            @PathVariable("id") Long id
     ) {
-        return ResponseEntity.ok(service.findById(articleId));
+        return ResponseEntity.ok(service.findById(id));
     }
 
-    @GetMapping("/code/{article-code}")
-    public ResponseEntity<ArticleResponse> findById(
-            @PathVariable("article-code") String articleCode
+    @GetMapping("/filtre/code/{code}")
+    public ResponseEntity<ArticleResponse> findByCode(
+            @PathVariable("code") String code
     ) {
-        return ResponseEntity.ok(service.findByCode(articleCode));
+        return ResponseEntity.ok(service.findByCode(code));
     }
 
-    @PostMapping(value = "/photo/{article-id}", consumes = "multipart/form-data")
-    public ResponseEntity<?> uploadCategoriePicture(
-            @PathVariable("article-id") Long articleId,
+    @GetMapping("/filtre/categorie/{id}")
+    public ResponseEntity<PageResponse<ArticleResponse>> findByCategorieId(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size,
+            @PathVariable("id") Long id
+    ){
+        return ResponseEntity.ok(service.findAllByCategorieId(page, size, id));
+    }
+
+    @PostMapping(value = "/upload/photo/{id}", consumes = "multipart/form-data")
+    public ResponseEntity<?> uploadPicture(
+            @PathVariable("id") Long id,
             @Parameter()
             @RequestPart("file") MultipartFile file
     ) {
-        service.uploadPicture(file, articleId);
+        service.savePhoto(file, id);
+        return ResponseEntity.accepted().build();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        service.delete(id);
         return ResponseEntity.accepted().build();
     }
 }

@@ -1,11 +1,15 @@
 package com.opmg.ApiGestionStock.article;
 
-import com.opmg.ApiGestionStock.categorie.Categorie;
+import com.opmg.ApiGestionStock.categorie.CategorieMapper;
 import com.opmg.ApiGestionStock.file.FileUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ArticleMapper {
+    private final CategorieMapper categorieMapper;
+
     public Article toArticle(ArticleRequest request) {
         return Article.builder()
                 .code(request.code())
@@ -23,7 +27,7 @@ public class ArticleMapper {
                 .prixUnitaireHt(article.getPrixUnitaireHt())
                 .tauxTva(article.getTauxTva())
                 .prixUnitaireTtc(article.getPrixUnitaireTtc())
-                .categorie(article.getCategorieId())
+                .categorie(categorieMapper.toCategorieResponse(article.getCategorie()))
                 .photo(FileUtils.readFileFromLocation(article.getPhoto()))
                 .build();
     }

@@ -6,6 +6,5 @@ import java.util.Optional;
 
 public interface CommandeClientRepository extends JpaRepository<CommandeClient, Long> {
     Optional<CommandeClient> findByCode(String code);
-
     boolean existsByCode(String code);
 }

@@ -1,11 +1,14 @@
 package com.opmg.ApiGestionStock.commandeClient;
 
-import com.opmg.ApiGestionStock.common.PageResponse;
+import com.opmg.ApiGestionStock.common.*;
+import com.opmg.ApiGestionStock.ligneCommandeClient.LigneCommandeClientResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("commandes-client")
@@ -17,6 +20,36 @@ public class CommandeClientController {
     @PostMapping
     public ResponseEntity<Long> save(@Valid @RequestBody CommandeClientRequest request) {
         return ResponseEntity.ok(service.save(request));
+    }
+
+    @PatchMapping("/etat/update")
+    public ResponseEntity<Long> updateEtat(@Valid @RequestBody ChangeEtatCommandeRequest request){
+        return ResponseEntity.ok(service.updateEtat(request));
+    }
+
+    @PatchMapping("/lignes-commande/quantite/update")
+    public ResponseEntity<Long> updateQuantite(@Valid @RequestBody ChangeQuantiteCommandeRequest request){
+        return ResponseEntity.ok(service.updateQuantite(request));
+    }
+
+    @PatchMapping("/client/update")
+    public ResponseEntity<Long> updateClient(@Valid @RequestBody ChangeClientRequest request){
+        return ResponseEntity.ok(service.updateClient(request));
+    }
+
+    @PatchMapping("/lignes-commande/article/update")
+    public ResponseEntity<Long> updateArticle(@Valid @RequestBody ChangeArticleCommandeRequest request){
+        return ResponseEntity.ok(service.updateArticle(request));
+    }
+
+    @PatchMapping("/date-commande/update")
+    public ResponseEntity<Long> updateDateCommande(@Valid @RequestBody ChangeDateCommandeRequest request){
+        return ResponseEntity.ok(service.updateDateCommande(request));
+    }
+
+    @DeleteMapping("/lignes-commande/delete")
+    public ResponseEntity<Long> deleteLigneCommande(@Valid @RequestBody DeleteLigneCommandeRequest request){
+        return ResponseEntity.ok(service.deleteArticle(request));
     }
 
     @GetMapping
@@ -35,6 +68,38 @@ public class CommandeClientController {
     @GetMapping("/code/{code}")
     public ResponseEntity<CommandeClientResponse> findByCode(@PathVariable("code") String code) {
         return ResponseEntity.ok(service.findByCode(code));
+    }
+
+    @GetMapping("/lignes-commande/commande-client/{id}")
+    public ResponseEntity<PageResponse<LigneCommandeClientResponse>> findLignesCommandeClientByCommandeClient(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size,
+            @PathVariable("id") Long id
+    ){
+        return ResponseEntity.ok(service.findAllLigneCommandeClientByCommandeClient(page, size,id));
+    }
+
+    @GetMapping("/lignes-commande/article/{id}")
+    public ResponseEntity<PageResponse<LigneCommandeClientResponse>> findLignesCommandeClientByArticle(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size,
+            @PathVariable("id") Long id
+    ){
+        return ResponseEntity.ok(service.findAllLigneCommandeClientByCommandeClient(page, size,id));
+    }
+
+    @GetMapping("/lignes-commande")
+    public ResponseEntity<PageResponse<LigneCommandeClientResponse>> findLignesCommandeClient(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size
+    ){
+        return ResponseEntity.ok(service.findAllLigneCommandeClient(page, size));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        service.delete(id);
+        return ResponseEntity.accepted().build();
     }
 
 }

@@ -20,22 +20,18 @@ import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.ROLE_NOT_FOUND
 @RequiredArgsConstructor
 @Slf4j
 public class RoleService {
-    private final RoleRepository roleRepository;
-    private final RoleMapper roleMapper;
+    private final RoleRepository repository;
+    private final RoleMapper mapper;
 
     public Long save(RoleRequest request) {
-        boolean exists = roleRepository.existsByName(request.name());
-        if (exists) {
-            log.error("Role already exists in the data base");
-            throw new InvalidEntityException(BusinessErrorCodes.ROLE_ALREADY_EXISTS);
-        }
-        return roleRepository.save(roleMapper.toRole(request)).getId();
+        isRoleExists(request.name());
+        return repository.save(mapper.toRole(request)).getId();
     }
 
     public PageResponse<RoleResponse> findAll(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
-        Page<Role> roles = roleRepository.findAll(pageable);
-        List<RoleResponse> rolesResponse = roles.stream().map(roleMapper::toRoleResponse).toList();
+        Page<Role> roles = repository.findAll(pageable);
+        List<RoleResponse> rolesResponse = roles.stream().map(mapper::toRoleResponse).toList();
         return new PageResponse<>(
                 rolesResponse,
                 roles.getNumber(),
@@ -47,20 +43,44 @@ public class RoleService {
     }
 
     public RoleResponse findById(Long roleId) {
-        return roleRepository.findById(roleId)
-                .map(roleMapper::toRoleResponse)
-                .orElseThrow(() -> new EntityNotFoundException(ROLE_NOT_FOUND));
+        return mapper.toRoleResponse(getRoleById(roleId));
     }
 
     public RoleResponse findByName(String name) {
-        return roleRepository.findByName(name)
-                .map(roleMapper::toRoleResponse)
-                .orElseThrow(() -> new EntityNotFoundException(ROLE_NOT_FOUND));
+        return mapper.toRoleResponse(getRoleByName(name));
+    }
+
+    public Long updateRoleName(ChangeRoleNameRequest request){
+        Role role = getRoleById(request.id());
+        isRoleExists(request.name());
+        role.setName(request.name());
+        return repository.save(role).getId();
     }
 
     public void init() {
-        if(roleRepository.findAll().isEmpty()) {
-            roleRepository.saveAll(List.of(Role.builder().name("USER").build(), Role.builder().name("ADMIN").build()));
+        if(repository.findAll().isEmpty()) {
+            repository.saveAll(List.of(Role.builder().name("USER").build(), Role.builder().name("ADMIN").build()));
         }
+    }
+
+    public Role getRoleById(Long id){
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(ROLE_NOT_FOUND));
+    }
+
+    public Role getRoleByName(String name){
+        return repository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException(ROLE_NOT_FOUND));
+    }
+
+    public void isRoleExists(String name){
+        if (repository.existsByName(name)) {
+            log.error("Role already exists in the data base");
+            throw new InvalidEntityException(BusinessErrorCodes.ROLE_ALREADY_EXISTS);
+        }
+    }
+
+    public List<Role> findAllByIds(List<Long> ids){
+        return repository.findAllById(ids);
     }
 }

@@ -11,18 +11,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-//    @Bean
-//    public GroupedOpenApi publicApi() {
-//        return GroupedOpenApi.builder()
-//                .group("public")
-//                .pathsToMatch("/auth/**")
-//                .build();
-//    }
 
     @Bean
     public OpenAPI customOpenApi() {
         return new OpenAPI()
-                .info(new Info().title("JavaInUse Authentication Service"))
+                .info(new Info().title("Gestion de stock REST API"))
                 .addSecurityItem(new SecurityRequirement().addList("JavaInUseSecurityScheme"))
                 .components(new Components().addSecuritySchemes("JavaInUseSecurityScheme", new SecurityScheme().name("JavaInUseSecurityScheme").type(SecurityScheme.Type.HTTP).scheme("basic")));
     }

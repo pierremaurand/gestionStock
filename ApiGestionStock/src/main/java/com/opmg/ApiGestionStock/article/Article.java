@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Collection;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -52,5 +53,33 @@ public class Article extends BaseEntity {
     @Transient
     public Long getCategorieId() {
         return categorie.getId();
+    }
+
+    @Transient
+    public List<Long> getLigneCommandeClientsIds(){
+        return ligneCommandeClients.stream()
+                .map(LigneCommandeClient::getId)
+                .toList();
+    }
+
+    @Transient
+    public List<Long> getLigneCommandeFournisseursIds(){
+        return ligneCommandeFournisseurs.stream()
+                .map(LigneCommandeFournisseur::getId)
+                .toList();
+    }
+
+    @Transient
+    public List<Long> getLigneVentesIds(){
+        return ligneVentes.stream()
+                .map(LigneVente::getId)
+                .toList();
+    }
+
+    @Transient
+    public List<Long> getMouvementStocksIds() {
+        return mouvementStocks.stream()
+                .map(MouvementStock::getId)
+                .toList();
     }
 }

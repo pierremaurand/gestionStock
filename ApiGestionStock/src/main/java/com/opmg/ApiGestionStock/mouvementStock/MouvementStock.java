@@ -4,6 +4,7 @@ import com.opmg.ApiGestionStock.article.Article;
 import com.opmg.ApiGestionStock.common.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,8 +21,13 @@ import java.time.LocalDate;
 @Entity
 public class MouvementStock extends BaseEntity {
     private LocalDate dateMouvement;
-    private double quantite;
+    private Double quantite;
     private TypeMouvement typeMouvement;
     @ManyToOne
     private Article article;
+
+    @Transient
+    public Long getArticleId(){
+        return article.getId();
+    }
 }

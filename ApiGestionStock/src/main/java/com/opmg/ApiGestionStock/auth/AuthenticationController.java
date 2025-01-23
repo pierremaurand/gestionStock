@@ -18,17 +18,11 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(
                 AuthenticationResponse.builder()
                         .token(authenticationService.verify(request))
                         .build()
         );
-    }
-
-    @PostMapping("register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request){
-        authenticationService.register(request);
-        return ResponseEntity.accepted().build();
     }
 }

@@ -3,20 +3,23 @@ package com.opmg.ApiGestionStock.article;
 import jakarta.validation.constraints.*;
 
 public record ArticleRequest(
-        Long id,
-        @NotNull(message = "200")
-        @NotEmpty(message = "200")
+        @NotNull(message = "100")
+        @NotEmpty(message = "100")
+        @NotBlank(message = "100")
         String code,
-        @NotNull(message = "201")
-        @NotEmpty(message = "201")
+        @NotNull(message = "101")
+        @NotEmpty(message = "101")
+        @NotBlank(message = "101")
         String designation,
-        @Positive(message = "202")
+        @NotNull(message = "102")
+        @Positive(message = "103")
         Double prixUnitaireHt,
-        @Positive(message = "203")
-        @Min(value = 0, message = "204")
-        @Max(value = 100, message = "205")
+        @NotNull(message = "104")
+        @Min(value = 0, message = "105")
+        @Max(value = 100, message = "106")
         Double tauxTva,
-        @NotNull(message = "206")
-        Long categorieId
+        @NotNull(message = "107")
+        @Min(value = 1, message = "108")
+        Long categorie
 ) {
 }

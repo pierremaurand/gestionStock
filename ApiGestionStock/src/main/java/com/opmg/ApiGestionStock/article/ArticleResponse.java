@@ -1,5 +1,7 @@
 package com.opmg.ApiGestionStock.article;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.opmg.ApiGestionStock.categorie.CategorieResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ArticleResponse {
     private Long id;
     private String code;
@@ -16,6 +19,6 @@ public class ArticleResponse {
     private Double prixUnitaireHt;
     private Double tauxTva;
     private Double prixUnitaireTtc;
-    private Long categorie;
+    private CategorieResponse categorie;
     private byte[] photo;
 }

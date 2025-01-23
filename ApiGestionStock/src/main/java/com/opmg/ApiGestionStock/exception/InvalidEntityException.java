@@ -10,23 +10,15 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class InvalidEntityException extends RuntimeException {
-    private List<String> errors;
     private HttpStatus httpStatus;
     private int code;
 
-    public InvalidEntityException(Throwable cause, BusinessErrorCodes code, List<String> errors) {
+    public InvalidEntityException(Throwable cause, BusinessErrorCodes code) {
         super(code.getDescription(), cause);
         this.httpStatus = code.getHttpStatus();
         this.code = code.getCode();
-        this.errors = errors;
     }
 
-    public InvalidEntityException(BusinessErrorCodes code, List<String> errors) {
-        super(code.getDescription());
-        this.httpStatus = code.getHttpStatus();
-        this.code = code.getCode();
-        this.errors = errors;
-    }
 
     public InvalidEntityException(BusinessErrorCodes code) {
         super(code.getDescription());

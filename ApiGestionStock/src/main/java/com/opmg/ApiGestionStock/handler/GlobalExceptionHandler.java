@@ -2,6 +2,7 @@ package com.opmg.ApiGestionStock.handler;
 
 import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
+import com.opmg.ApiGestionStock.exception.InvalidOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -55,6 +56,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleException(EntityNotFoundException exp) {
+        return ResponseEntity
+                .status(exp.getHttpStatus())
+                .body(
+                        ExceptionResponse.builder()
+                                .businessErrorCode(exp.getCode())
+                                .businessErrorDescription(exp.getMessage())
+                                .error(exp.getMessage())
+                                .build()
+                );
+    }
+
+    @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<ExceptionResponse> handleException(InvalidOperationException exp) {
         return ResponseEntity
                 .status(exp.getHttpStatus())
                 .body(

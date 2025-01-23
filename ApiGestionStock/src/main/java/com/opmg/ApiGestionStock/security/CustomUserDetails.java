@@ -24,11 +24,11 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return user.getMotDePasse();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getLogin();
     }
 }

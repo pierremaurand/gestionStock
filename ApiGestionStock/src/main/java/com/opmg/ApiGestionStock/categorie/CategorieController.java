@@ -1,5 +1,6 @@
 package com.opmg.ApiGestionStock.categorie;
 
+import com.opmg.ApiGestionStock.article.ArticleResponse;
 import com.opmg.ApiGestionStock.common.PageResponse;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,27 +30,23 @@ public class CategorieController {
         return ResponseEntity.ok(service.findAll(page, size));
     }
 
-    @GetMapping("/id/{categorie-id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<CategorieResponse> findById(
-            @PathVariable("categorie-id") Long categorieId
+            @PathVariable("id") Long id
     ) {
-        return ResponseEntity.ok(service.findById(categorieId));
+        return ResponseEntity.ok(service.findById(id));
     }
 
-    @GetMapping("/code/{categorie-code}")
+    @GetMapping("/code/{code}")
     public ResponseEntity<CategorieResponse> findById(
-            @PathVariable("categorie-code") String categorieCode
+            @PathVariable("code") String code
     ) {
-        return ResponseEntity.ok(service.findByCode(categorieCode));
+        return ResponseEntity.ok(service.findByCode(code));
     }
 
-    @PostMapping(value = "/photo/{categorie-id}", consumes = "multipart/form-data")
-    public ResponseEntity<?> uploadCategoriePicture(
-            @PathVariable("categorie-id") Long categorieId,
-            @Parameter()
-            @RequestPart("file") MultipartFile file
-    ) {
-        service.uploadPicture(file, categorieId);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        service.delete(id);
         return ResponseEntity.accepted().build();
     }
 }

@@ -1,11 +1,13 @@
 package com.opmg.ApiGestionStock.client;
 
 import com.opmg.ApiGestionStock.common.PageResponse;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("clients")
@@ -53,5 +55,21 @@ public class ClientController {
             @PathVariable("client-email") String clientEmail
     ) {
         return ResponseEntity.ok(service.findByEmail(clientEmail));
+    }
+
+    @PostMapping(value = "/upload/photo/{id}", consumes = "multipart/form-data")
+    public ResponseEntity<?> uploadPhoto(
+            @PathVariable("id") Long id,
+            @Parameter()
+            @RequestPart("file") MultipartFile file
+    ) {
+        service.savePhoto(file, id);
+        return ResponseEntity.accepted().build();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        service.delete(id);
+        return ResponseEntity.accepted().build();
     }
 }

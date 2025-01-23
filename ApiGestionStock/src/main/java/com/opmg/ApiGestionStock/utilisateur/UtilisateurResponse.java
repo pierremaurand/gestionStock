@@ -1,5 +1,6 @@
 package com.opmg.ApiGestionStock.utilisateur;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.opmg.ApiGestionStock.common.Sexe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,11 +14,11 @@ import java.util.concurrent.ScheduledExecutorService;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UtilisateurResponse {
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String nom;
+    private String login;
     private Sexe sexe;
     private byte[] photo;
-    private List<Long> roles;
 }

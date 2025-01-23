@@ -3,8 +3,10 @@ package com.opmg.ApiGestionStock.utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
-    Utilisateur findByUsername(String username);
-    boolean existsByUsername(String username);
+    Optional<Utilisateur> findByLogin(String login);
+    boolean existsByLogin(String login);
 }

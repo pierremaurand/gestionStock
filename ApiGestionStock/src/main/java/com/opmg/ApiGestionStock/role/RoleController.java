@@ -29,17 +29,24 @@ public class RoleController {
         return ResponseEntity.ok(service.findAll(page, size));
     }
 
-    @GetMapping("/id/{role-id}")
+    @GetMapping("/filtre/id/{role-id}")
     public ResponseEntity<RoleResponse> findById(
             @PathVariable("role-id") Long roleId
     ) {
         return ResponseEntity.ok(service.findById(roleId));
     }
 
-    @GetMapping("/name/{role-name}")
+    @GetMapping("/filtre/name/{role-name}")
     public ResponseEntity<RoleResponse> findByName(
             @PathVariable("role-name") String roleName
     ) {
         return ResponseEntity.ok(service.findByName(roleName));
+    }
+
+    @PatchMapping("/update/name")
+    public ResponseEntity<Long> changeName(
+            @RequestBody ChangeRoleNameRequest request
+    ){
+        return ResponseEntity.ok(service.updateRoleName(request));
     }
 }
