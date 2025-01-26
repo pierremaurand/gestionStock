@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nouvel-article',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class NouvelArticleComponent {
 
+  constructor(private router: Router){}
+
+
+  onCancel(): void {
+    this.router.navigate(['home/articles']);
+  }
 }

@@ -26,8 +26,9 @@
               <li
                 class="list-group-item"
                 *ngFor="let sousMenu of menu.sousMenu"
+                [ngClass]="{'text-white bg-primary': sousMenu.active, '': !sousMenu.active}"
               >
-                <a href="javascript:void(0)" (click)="navigate(sousMenu.url)">
+                <a href="javascript:void(0)" (click)="navigate(sousMenu)" style="color: inherit;">
                   <i class="{{ sousMenu.icon }}"></i>&nbsp;{{ sousMenu.titre }}
                 </a>
               </li>

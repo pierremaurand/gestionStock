@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-changer-mot-de-passe',
@@ -8,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class ChangerMotDePasseComponent {
 
+  constructor(private router: Router){}
+
+  onCancel(): void {
+    this.router.navigate(['home/parametres/profil']);
+  }
 }

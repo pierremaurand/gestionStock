@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Menu } from './menu';
 
 @Component({
   selector: 'app-menu',
-  imports: [NgFor],
+  imports: [NgFor, NgClass],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss'
+  styleUrl: './menu.component.scss',
 })
 export class MenuComponent {
-
-
   menuProperties: Array<Menu> = [
     {
       id: '1',
@@ -21,17 +19,17 @@ export class MenuComponent {
       sousMenu: [
         {
           id: '11',
-          titre: 'Vue d\'ensemble',
+          titre: "Vue d'ensemble",
           icon: 'fa-solid fa-chart-pie',
-          url: 'home/dashboard/vueensemble'
+          url: 'home/dashboard/vueensemble',
         },
         {
           id: '12',
           titre: 'Statistiques',
           icon: 'fa-solid fa-chart-line',
-          url: 'home/dashboard/statistiques'
-        }
-      ]
+          url: 'home/dashboard/statistiques',
+        },
+      ],
     },
     {
       id: '2',
@@ -43,15 +41,15 @@ export class MenuComponent {
           id: '21',
           titre: 'Articles',
           icon: 'fa-solid fa-boxes-stacked',
-          url: 'home/articles/articles'
+          url: 'home/articles/articles',
         },
         {
           id: '22',
           titre: 'Mouvements de stock',
           icon: 'fa-brands fa-stack-overflow',
-          url: 'home/articles/mouvements-stock'
-        }
-      ]
+          url: 'home/articles/mouvements-stock',
+        },
+      ],
     },
     {
       id: '3',
@@ -63,15 +61,15 @@ export class MenuComponent {
           id: '31',
           titre: 'Clients',
           icon: 'fa-solid fa-users',
-          url: 'home/clients/clients'
+          url: 'home/clients/clients',
         },
         {
           id: '32',
           titre: 'Commandes clients',
           icon: 'fa-solid fa-basket-shopping',
-          url: 'home/clients/commandes-client'
-        }
-      ]
+          url: 'home/clients/commandes-client',
+        },
+      ],
     },
     {
       id: '4',
@@ -83,15 +81,15 @@ export class MenuComponent {
           id: '41',
           titre: 'Fournisseurs',
           icon: 'fa-solid fa-users',
-          url: 'home/fournisseurs/fournisseurs'
+          url: 'home/fournisseurs/fournisseurs',
         },
         {
           id: '42',
           titre: 'Commandes fournisseurs',
           icon: 'fa-solid fa-truck',
-          url: 'home/fournisseurs/commandes-fournisseur'
-        }
-      ]
+          url: 'home/fournisseurs/commandes-fournisseur',
+        },
+      ],
     },
     {
       id: '5',
@@ -103,22 +101,28 @@ export class MenuComponent {
           id: '51',
           titre: 'Catégories',
           icon: 'fa-solid fa-screwdriver-wrench',
-          url: 'home/parametres/categories'
+          url: 'home/parametres/categories',
         },
         {
           id: '52',
           titre: 'Utilisateurs',
           icon: 'fa-solid fa-users-gear',
-          url: 'home/parametres/utilisateurs'
-        }
-      ]
-    }
+          url: 'home/parametres/utilisateurs',
+        },
+      ],
+    },
   ];
 
-  constructor(private router: Router){}
+  private lastSelectedMenu: Menu | undefined;
 
-  navigate(url?: string): void {
-    this.router.navigate([url]);
+  constructor(private router: Router) {}
+
+  navigate(menu: Menu): void {
+    if (this.lastSelectedMenu) {
+      this.lastSelectedMenu.active = false;
+    }
+    menu.active = true;
+    this.lastSelectedMenu = menu;
+    this.router.navigate([menu.url]);
   }
-
 }

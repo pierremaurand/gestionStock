@@ -1,12 +1,21 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-bouttons-action',
-  imports: [],
+  imports: [NgIf],
   templateUrl: './bouttons-action.component.html',
   styleUrl: './bouttons-action.component.scss'
 })
 export class BouttonsActionComponent {
+
+  @Input()
+  isNouveauVisible = true;
+  @Input()
+  isImporterVisible = true;
+  @Input()
+  isExporterVisible = true;
+
   @Output()
   clickEvent = new EventEmitter();
 
