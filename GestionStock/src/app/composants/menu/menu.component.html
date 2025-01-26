@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="d-flex flex-column">
       <h4 class="text-center mt-3 mb-3">Gestion de Stock V2.0</h4>
-      <div class="accordion" id="accordionExample">
+      <div class="accordion" id="accordionMenu">
         <div class="accordion-item" *ngFor="let menu of menuProperties">
           <h2 class="accordion-header" id="menu{{ menu.id }}">
             <button
@@ -10,7 +10,7 @@
               type="button"
               data-bs-toggle="collapse"
               [attr.data-bs-target]="'#collapse' + menu.id"
-              aria-expanded="true"
+              aria-expanded="false"
               [attr.aria-controls]="'collapse' + menu.id"
             >
               <i class="{{ menu.icon }}"></i>&nbsp;{{ menu.titre }}
@@ -20,7 +20,7 @@
             id="collapse{{ menu.id }}"
             class="accordion-collapse collapse"
             [attr.aria-labelledby]="'menu' + menu.id"
-            data-bs-parent="#accordionExample"
+            data-bs-parent="#accordionMenu"
           >
             <ul class="list-group">
               <li

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DetailsArticleComponent } from '../../composants/details-article/details-article.component';
 import { PaginationComponent } from '../../../../composants/pagination/pagination.component';
 import { BouttonsActionComponent } from '../../../../composants/bouttons-action/bouttons-action.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-articles',
@@ -11,4 +12,9 @@ import { BouttonsActionComponent } from '../../../../composants/bouttons-action/
 })
 export class ArticlesComponent {
 
+  constructor(private router:Router){}
+
+  nouvelArticle(): void{
+    this.router.navigate(['home/articles/nouvel-article']);
+  }
 }

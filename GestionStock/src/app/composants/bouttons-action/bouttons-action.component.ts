@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-bouttons-action',
@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './bouttons-action.component.scss'
 })
 export class BouttonsActionComponent {
+  @Output()
+  clickEvent = new EventEmitter();
+
+  bouttonNouveauClick(){
+    this.clickEvent.emit();
+  }
 
 }

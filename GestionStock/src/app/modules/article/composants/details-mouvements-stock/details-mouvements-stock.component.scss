@@ -1,0 +1,24 @@
+img{
+  height: 100px;
+  width: 100px;
+}
+
+.actions{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-cat{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+}
+
+.accordion-body{
+  height: 20vh;
+  overflow-y: auto;
+}

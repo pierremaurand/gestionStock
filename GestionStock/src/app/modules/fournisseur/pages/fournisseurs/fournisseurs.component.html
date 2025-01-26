@@ -1,1 +1,16 @@
-<p>fournisseurs works!</p>
+<div class="d-flex flex-column gap-1">
+  <div class="row page-header">
+    <div class="col-md-7 title">
+      <h1 class="h2">Liste des fournisseurs</h1>
+    </div>
+    <div class="col-md-5 actions text-end">
+      <app-bouttons-action (clickEvent)="nouveauFournisseur()"></app-bouttons-action>
+    </div>
+  </div>
+  <div class="page-content">
+    <app-details-client-fournisseur></app-details-client-fournisseur>
+  </div>
+  <div class="page-pagination">
+    <app-pagination></app-pagination>
+  </div>
+</div>

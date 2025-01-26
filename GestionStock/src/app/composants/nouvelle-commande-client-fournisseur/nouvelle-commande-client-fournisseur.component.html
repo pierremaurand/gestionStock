@@ -1,0 +1,118 @@
+<h1 class="h3">Nouvelle commande {{origin}}</h1>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4 border-2 border-end">
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="code"
+              name="code"
+              placeholder="Code de la commande"
+            />
+          </div>
+          <div class="col-md-12 mb-3">
+            <input
+              type="date"
+              class="form-control"
+              id="dateCommande"
+              name="dateCommande"
+              placeholder="Code de la commande"
+            />
+          </div>
+          <div class="col-md-12">
+            <select
+              name="client"
+              id="client"
+              class="form-select"
+              title="client"
+            >
+              <option value="">Choisir un client/fournisseur</option>
+              <option value="1">fournisseur</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 border-2 border-end">
+        <div class="row mb-3">
+          <div class="col-md-1"><i class="fa-solid fa-user"></i></div>
+          <div class="col-md-11">Pierre Maurand OVASSA</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-1">
+            <i class="fa-solid fa-envelope text-primary"></i>
+          </div>
+          <div class="col-md-11">pierremaurand.gmail.com</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-1">
+            <i class="fa-solid fa-square-phone text-success"></i>
+          </div>
+          <div class="col-md-11">65 21 44 15</div>
+        </div>
+        <div class="row">
+          <div class="col-md-1">
+            <i class="fa-solid fa-hourglass-half text-warning"></i>
+          </div>
+          <div class="col-md-11">EN PREPARATION</div>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <img
+          src="assets/images/profil.png"
+          class="rounded-circle"
+          alt="image-client-fournisseur"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <select
+          name="article"
+          id="article"
+          class="form-select"
+          title="article"
+        >
+        <option value="">Choisir un article</option>
+        <option value="1">Article art0001</option>
+      </select>
+      </div>
+      <div class="col-md-3">
+        <input title="quantite" type="number" class="form-control" id="quantite" name="quantite" />
+      </div>
+      <div class="col-md-4">
+        <input title="prixUnitaire" type="number" class="form-control" id="prixUnitaire" name="prixUnitaire" />
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-success">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card mb-3">
+  <div class="card-body lignes-commande">
+    <app-details-ligne-commande-client-fournisseur></app-details-ligne-commande-client-fournisseur>
+    <app-details-ligne-commande-client-fournisseur></app-details-ligne-commande-client-fournisseur>
+    <app-details-ligne-commande-client-fournisseur></app-details-ligne-commande-client-fournisseur>
+    <app-details-ligne-commande-client-fournisseur></app-details-ligne-commande-client-fournisseur>
+    <app-details-ligne-commande-client-fournisseur></app-details-ligne-commande-client-fournisseur>
+    <app-details-ligne-commande-client-fournisseur></app-details-ligne-commande-client-fournisseur>
+  </div>
+  <div class="card-footer">
+    <h3 class="text-end">Total commande: 112121</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 text-end">
+    <button class="btn btn-danger me-2" type="button"><i class="fa-solid fa-ban"></i>&nbsp;Annuler</button>
+    <button class="btn btn-primary" type="button"><i class="fa-solid fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+  </div>
+</div>
