@@ -1,4 +1,14 @@
-img{
-  width: 150px;
-  height: 150px;
+.page{
+  height: 100%;
+  overflow: auto;
 }
+
+.image{
+  width: 20%;
+}
+
+.image img{
+  width: 100%;
+}
+
+

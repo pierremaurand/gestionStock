@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { MainComponent } from './pages/main/main.component';
+import { ApplicationGuardService } from './services/guard/application-guard.service';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: MainComponent,
+    canActivate: [ApplicationGuardService],
     children: [
       {
         path: '',

@@ -1,24 +1,30 @@
-img{
-  height: 100px;
-  width: 100px;
+.image{
+  width: 14%;
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+}
+
+.infos{
+  width: 29%;
+}
+
+.categorie{
+  width: 29%;
+  display: flex;
+  align-items: center;
 }
 
 .actions{
-  height: 100%;
+  width: 28%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.icon-cat{
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: larger;
 }
 
 .accordion-body{
-  height: 20vh;
+  height: 200px;
   overflow-y: auto;
 }

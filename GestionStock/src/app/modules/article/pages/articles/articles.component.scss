@@ -1,12 +1,20 @@
-.page-header, .page-pagination{
-  height: 10vh;
+.page{
+  height: 100%;
+  overflow: hidden;
+}
+
+.page-body{
+  height: 100%;
+  overflow: hidden;
+}
+
+.page-header, .page-footer{
+  overflow: hidden;
 }
 
 .page-content{
-  height: 50vh;
+  height: 84%;
   overflow-y: auto;
-  padding: 3px;
-  border: 1px solid black;
 }
 
 
