@@ -17,6 +17,6 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(new Info().title("Gestion de stock REST API"))
                 .addSecurityItem(new SecurityRequirement().addList("JavaInUseSecurityScheme"))
-                .components(new Components().addSecuritySchemes("JavaInUseSecurityScheme", new SecurityScheme().name("JavaInUseSecurityScheme").type(SecurityScheme.Type.HTTP).scheme("basic")));
+                .components(new Components().addSecuritySchemes("JavaInUseSecurityScheme", new SecurityScheme().name("JavaInUseSecurityScheme").type(SecurityScheme.Type.HTTP).scheme("bearer")));
     }
 }

@@ -23,8 +23,8 @@ public enum BusinessErrorCodes {
     ROLE_NOT_VALID(4001, HttpStatus.BAD_REQUEST, "ROle not valid"),
     ROLE_ALREADY_EXISTS(4002, HttpStatus.BAD_REQUEST, "Role already exists"),
 
-    UTILISATEUR_NOT_FOUND(5000, HttpStatus.NOT_FOUND, "Privilege not found"),
-    UTILISATEUR_NOT_VALID(5001, HttpStatus.BAD_REQUEST, "Privilege not valid"),
+    UTILISATEUR_NOT_FOUND(5000, HttpStatus.NOT_FOUND, "Utilisateur not found"),
+    UTILISATEUR_NOT_VALID(5001, HttpStatus.BAD_REQUEST, "Utilisateur not valid"),
     USERNAME_ALREADY_EXISTS(5002, HttpStatus.BAD_REQUEST, "Username already exists"),
 
     COMMANDE_CLIENT_NOT_FOUND(6000, HttpStatus.NOT_FOUND, "Code commande client not found"),
