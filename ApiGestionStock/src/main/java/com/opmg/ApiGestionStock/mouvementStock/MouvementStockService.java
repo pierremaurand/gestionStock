@@ -45,6 +45,7 @@ public class MouvementStockService {
                 mouvementStocks.getNumber(),
                 mouvementStocks.getSize(),
                 mouvementStocks.getTotalElements(),
+                mouvementStocks.getTotalPages(),
                 mouvementStocks.isFirst(),
                 mouvementStocks.isLast()
         );
@@ -60,6 +61,7 @@ public class MouvementStockService {
                 mouvementStocks.getNumber(),
                 mouvementStocks.getSize(),
                 mouvementStocks.getTotalElements(),
+                mouvementStocks.getTotalPages(),
                 mouvementStocks.isFirst(),
                 mouvementStocks.isLast()
         );

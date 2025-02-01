@@ -5,13 +5,13 @@
     </div>
     <div class="card-body">
       <div class="mb-3">
-        <input  type="text" class="form-control" id="login" placeholder="Nom d'utilisateur">
+        <input [(ngModel)]="authRequest.login"  type="text" class="form-control" id="login" placeholder="Nom d'utilisateur">
       </div>
       <div class="mb-3">
-        <input  type="password" class="form-control" id="motDePasse" placeholder="Mot de passe">
+        <input [(ngModel)]="authRequest.motDePasse" type="password" class="form-control" id="motDePasse" placeholder="Mot de passe">
       </div>
       <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" (click)="login()">
           <i class="fa-solid fa-check"></i>&nbsp;Se connecter
         </button>
       </div>

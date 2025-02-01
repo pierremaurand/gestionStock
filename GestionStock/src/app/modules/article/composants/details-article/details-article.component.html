@@ -1,7 +1,7 @@
 <div class="card mb-1">
   <div class="card-body">
     <div class="row">
-      <div class="image border-2 border-end">
+      <div class="image text-center border-2 border-end">
         <img src="assets/images/product.png" alt="images-article" />
       </div>
       <div class="infos border-2 border-end">
@@ -9,7 +9,7 @@
           <div class="col-md-1">
             <i class="fa-solid fa-circle-info text-primary"></i>
           </div>
-          <div class="col-md-11">CAT0001:</div>
+          <div class="col-md-11">{{ article.code }}</div>
         </div>
         <div class="row">
           <div class="col-md-1">
@@ -37,14 +37,10 @@
           </div>
           <div class="col-md-10">
             <div class="row">
-              <div class="col">
-                Code catégorie
-              </div>
+              <div class="col">Code catégorie</div>
             </div>
             <div class="row">
-              <div class="col">
-                Description
-              </div>
+              <div class="col">Description</div>
             </div>
           </div>
         </div>
@@ -52,13 +48,19 @@
       <div class="actions">
         <div class="row">
           <div class="col-md-4">
-            <button type="button" class="btn btn-link btn-sm text-warning"><i class="fa-solid fa-pencil"></i>Modifier</button>
+            <button type="button" class="btn btn-link btn-sm text-warning">
+              <i class="fa-solid fa-pencil"></i>&nbsp;Modifier
+            </button>
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-link btn-sm text-danger"><i class="fa-solid fa-trash-can"></i>Supprimer</button>
+            <button type="button" class="btn btn-link btn-sm text-danger">
+              <i class="fa-solid fa-trash-can"></i>&nbsp;Supprimer
+            </button>
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-link btn-sm text-primary"><i class="fa-solid fa-table-list"></i>Détails</button>
+            <button type="button" class="btn btn-link btn-sm text-primary">
+              <i class="fa-solid fa-table-list"></i>&nbsp;Détails
+            </button>
           </div>
         </div>
       </div>

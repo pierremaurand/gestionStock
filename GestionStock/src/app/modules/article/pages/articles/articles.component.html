@@ -13,11 +13,10 @@
       </div>
     </div>
     <div class="page-content">
-      <app-details-article></app-details-article>
-      <app-details-article></app-details-article>
-      <app-details-article></app-details-article>
-      <app-details-article></app-details-article>
-      <app-details-article></app-details-article>
+      <app-details-article
+        *ngFor="let article of articleResponse.content"
+        [article]="article"
+      ></app-details-article>
     </div>
     <div class="page-footer">
       <app-pagination></app-pagination>

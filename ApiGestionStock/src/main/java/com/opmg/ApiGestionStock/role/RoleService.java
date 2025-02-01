@@ -37,6 +37,7 @@ public class RoleService {
                 roles.getNumber(),
                 roles.getSize(),
                 roles.getTotalElements(),
+                roles.getTotalPages(),
                 roles.isFirst(),
                 roles.isLast()
         );

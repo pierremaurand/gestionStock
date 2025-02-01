@@ -60,6 +60,7 @@ public class UtilisateurService {
                 utilisateurs.getNumber(),
                 utilisateurs.getSize(),
                 utilisateurs.getTotalElements(),
+                utilisateurs.getTotalPages(),
                 utilisateurs.isFirst(),
                 utilisateurs.isLast()
         );

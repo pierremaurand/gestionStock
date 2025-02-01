@@ -95,6 +95,7 @@ public class LigneCommandeClientService {
                 ligneCommandeClients.getNumber(),
                 ligneCommandeClients.getSize(),
                 ligneCommandeClients.getTotalElements(),
+                ligneCommandeClients.getTotalPages(),
                 ligneCommandeClients.isFirst(),
                 ligneCommandeClients.isLast()
         );

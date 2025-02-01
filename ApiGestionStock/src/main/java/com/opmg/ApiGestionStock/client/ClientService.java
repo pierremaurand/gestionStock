@@ -43,6 +43,7 @@ public class ClientService {
                 clients.getNumber(),
                 clients.getSize(),
                 clients.getTotalElements(),
+                clients.getTotalPages(),
                 clients.isFirst(),
                 clients.isLast()
         );

@@ -59,6 +59,7 @@ public class CommandeClientService {
                 commandeClients.getNumber(),
                 commandeClients.getSize(),
                 commandeClients.getTotalElements(),
+                commandeClients.getTotalPages(),
                 commandeClients.isFirst(),
                 commandeClients.isLast()
         );

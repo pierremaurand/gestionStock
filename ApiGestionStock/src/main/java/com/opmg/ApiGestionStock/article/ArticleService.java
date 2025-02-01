@@ -49,6 +49,7 @@ public class ArticleService {
                 articles.getNumber(),
                 articles.getSize(),
                 articles.getTotalElements(),
+                articles.getTotalPages(),
                 articles.isFirst(),
                 articles.isLast()
         );
@@ -79,6 +80,7 @@ public class ArticleService {
                 articles.getNumber(),
                 articles.getSize(),
                 articles.getTotalElements(),
+                articles.getTotalPages(),
                 articles.isFirst(),
                 articles.isLast()
         );

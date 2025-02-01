@@ -43,6 +43,7 @@ public class FournisseurService {
                 fournisseurs.getNumber(),
                 fournisseurs.getSize(),
                 fournisseurs.getTotalElements(),
+                fournisseurs.getTotalPages(),
                 fournisseurs.isFirst(),
                 fournisseurs.isLast()
         );

@@ -44,6 +44,7 @@ public class LigneCommandeFournisseurService {
                 ligneCommandeFournisseurs.getNumber(),
                 ligneCommandeFournisseurs.getSize(),
                 ligneCommandeFournisseurs.getTotalElements(),
+                ligneCommandeFournisseurs.getTotalPages(),
                 ligneCommandeFournisseurs.isFirst(),
                 ligneCommandeFournisseurs.isLast()
         );
@@ -59,6 +60,7 @@ public class LigneCommandeFournisseurService {
                 ligneCommandeFournisseurs.getNumber(),
                 ligneCommandeFournisseurs.getSize(),
                 ligneCommandeFournisseurs.getTotalElements(),
+                ligneCommandeFournisseurs.getTotalPages(),
                 ligneCommandeFournisseurs.isFirst(),
                 ligneCommandeFournisseurs.isLast()
         );

@@ -41,6 +41,7 @@ public class LigneVenteService {
                 ligneVentes.getNumber(),
                 ligneVentes.getSize(),
                 ligneVentes.getTotalElements(),
+                ligneVentes.getTotalPages(),
                 ligneVentes.isFirst(),
                 ligneVentes.isLast()
         );
@@ -55,6 +56,7 @@ public class LigneVenteService {
                 ligneVentes.getNumber(),
                 ligneVentes.getSize(),
                 ligneVentes.getTotalElements(),
+                ligneVentes.getTotalPages(),
                 ligneVentes.isFirst(),
                 ligneVentes.isLast()
         );
@@ -69,6 +71,7 @@ public class LigneVenteService {
                 ligneVentes.getNumber(),
                 ligneVentes.getSize(),
                 ligneVentes.getTotalElements(),
+                ligneVentes.getTotalPages(),
                 ligneVentes.isFirst(),
                 ligneVentes.isLast()
         );

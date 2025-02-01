@@ -68,6 +68,7 @@ public class VenteService {
                 ventes.getNumber(),
                 ventes.getSize(),
                 ventes.getTotalElements(),
+                ventes.getTotalPages(),
                 ventes.isFirst(),
                 ventes.isLast()
         );

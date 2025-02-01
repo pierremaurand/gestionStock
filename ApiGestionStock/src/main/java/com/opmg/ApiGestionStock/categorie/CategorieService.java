@@ -42,6 +42,7 @@ public class CategorieService {
                 categories.getNumber(),
                 categories.getSize(),
                 categories.getTotalElements(),
+                categories.getTotalPages(),
                 categories.isFirst(),
                 categories.isLast()
         );

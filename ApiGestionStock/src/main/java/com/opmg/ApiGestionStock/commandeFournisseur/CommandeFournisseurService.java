@@ -62,6 +62,7 @@ public class CommandeFournisseurService {
                 commandeFournisseurs.getNumber(),
                 commandeFournisseurs.getSize(),
                 commandeFournisseurs.getTotalElements(),
+                commandeFournisseurs.getTotalPages(),
                 commandeFournisseurs.isFirst(),
                 commandeFournisseurs.isLast()
         );
