@@ -16,42 +16,42 @@ public class CommandeFournisseurController {
     private final CommandeFournisseurService service;
 
     @PostMapping
-    public ResponseEntity<Long> save(@Valid @RequestBody CommandeFournisseurRequest request) {
+    public ResponseEntity<Long> saveCommandeFournisseur(@Valid @RequestBody CommandeFournisseurRequest request) {
         return ResponseEntity.ok(service.save(request));
     }
 
     @PatchMapping("/etat/update")
-    public ResponseEntity<Long> updateEtat(@Valid @RequestBody ChangeEtatCommandeRequest request){
+    public ResponseEntity<Long> updateCommandeFournisseurEtat(@Valid @RequestBody ChangeEtatCommandeRequest request){
         return ResponseEntity.ok(service.updateEtat(request));
     }
 
     @PatchMapping("/lignes-commande/quantite/update")
-    public ResponseEntity<Long> updateQuantite(@Valid @RequestBody ChangeQuantiteCommandeRequest request){
+    public ResponseEntity<Long> updateLigneCommandeFournisseurQuantite(@Valid @RequestBody ChangeQuantiteCommandeRequest request){
         return ResponseEntity.ok(service.updateQuantite(request));
     }
 
     @PatchMapping("/fournisseur/update")
-    public ResponseEntity<Long> updateFournisseur(@Valid @RequestBody ChangeFournisseurRequest request){
+    public ResponseEntity<Long> updateCommandeFournisseurFournisseur(@Valid @RequestBody ChangeFournisseurRequest request){
         return ResponseEntity.ok(service.updateFournisseur(request));
     }
 
     @PatchMapping("/lignes-commande/article/update")
-    public ResponseEntity<Long> updateArticle(@Valid @RequestBody ChangeArticleCommandeRequest request){
+    public ResponseEntity<Long> updateLigneCommandeFournisseurArticle(@Valid @RequestBody ChangeArticleCommandeRequest request){
         return ResponseEntity.ok(service.updateArticle(request));
     }
 
     @PatchMapping("/date-commande/update")
-    public ResponseEntity<Long> updateDateCommande(@Valid @RequestBody ChangeDateCommandeRequest request){
+    public ResponseEntity<Long> updateCommandeFournisseurDateCommande(@Valid @RequestBody ChangeDateCommandeRequest request){
         return ResponseEntity.ok(service.updateDateCommande(request));
     }
 
     @DeleteMapping("/lignes-commande/delete")
-    public ResponseEntity<Long> deleteLigneCommande(@Valid @RequestBody DeleteLigneCommandeRequest request){
+    public ResponseEntity<Long> deleteLigneCommandeFournisseur(@Valid @RequestBody DeleteLigneCommandeRequest request){
         return ResponseEntity.ok(service.deleteArticle(request));
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<CommandeFournisseurResponse>> findAll(
+    public ResponseEntity<PageResponse<CommandeFournisseurResponse>> findAllCommandeFournisseurs(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
     ) {
@@ -59,17 +59,17 @@ public class CommandeFournisseurController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<CommandeFournisseurResponse> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<CommandeFournisseurResponse> findCommandeFournisseurById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<CommandeFournisseurResponse> findByCode(@PathVariable("code") String code) {
+    public ResponseEntity<CommandeFournisseurResponse> findCommandeFournisseurByCode(@PathVariable("code") String code) {
         return ResponseEntity.ok(service.findByCode(code));
     }
 
     @GetMapping("/lignes-commande/commande-fournisseur/{id}")
-    public ResponseEntity<PageResponse<LigneCommandeFournisseurResponse>> findLignesCommandeFournisseurByCommandeFournisseur(
+    public ResponseEntity<PageResponse<LigneCommandeFournisseurResponse>> findAllLigneCommandeFournisseursByCommandeFournisseur(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             @PathVariable("id") Long id
@@ -78,7 +78,7 @@ public class CommandeFournisseurController {
     }
 
     @GetMapping("/lignes-commande/article/{id}")
-    public ResponseEntity<PageResponse<LigneCommandeFournisseurResponse>> findLignesCommandeFournisseurByArticle(
+    public ResponseEntity<PageResponse<LigneCommandeFournisseurResponse>> findAllLigneCommandeFournisseursByArticle(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             @PathVariable("id") Long id
@@ -87,7 +87,7 @@ public class CommandeFournisseurController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteCommandeFournisseur(@PathVariable("id") Long id){
         service.delete(id);
         return ResponseEntity.accepted().build();
     }

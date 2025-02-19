@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 public class VenteMapper {
     public Vente toVente(VenteRequest request){
         return Vente.builder()
+                .id(request.id())
                 .code(request.code())
                 .dateVente(request.dateVente())
                 .build();

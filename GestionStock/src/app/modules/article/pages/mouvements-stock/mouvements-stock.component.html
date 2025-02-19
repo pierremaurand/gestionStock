@@ -2,24 +2,40 @@
   <div class="card-body page-body">
     <div class="page-header">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
           <h1 class="h3">Mouvements des stocks</h1>
         </div>
-        <div class="col-md-4 actions text-end">
-          <app-bouttons-action [isNouveauVisible]="false"></app-bouttons-action>
+        <div class="col-md-5 actions text-end">
+          <app-bouttons-action
+            [isNouveauVisible]="false"
+            [isImporterVisible]="false"
+          ></app-bouttons-action>
         </div>
       </div>
     </div>
-    <div class="page-content accordion" id="accordionExample">
-      <app-details-mouvements-stock></app-details-mouvements-stock>
+    <div class="row">
+      <div class="col-md-12">
+        <app-pagination
+          [page]="page"
+          [pages]="pages"
+          [totalPages]="articleResponse.totalPages"
+          (goToPageEvent)="goToPage($event)"
+        ></app-pagination>
+      </div>
     </div>
-    <div class="page-footer">
-      <app-pagination></app-pagination>
+    <div class="accordion" id="accordionArticle">
+      <div class="accordion-item mb-1"  *ngFor="let article of articleResponse.content">
+        <app-ligne-mouvement-stock
+        [article]="article"
+        (correctStock)="onCorrectStockClicked($event)"
+        [mouvements]="mouvements"
+      ></app-ligne-mouvement-stock>
+      </div>
     </div>
 
     <div
       class="modal fade"
-      id="exampleModal"
+      id="correctionStockModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -49,7 +65,9 @@
                       type="text"
                       class="form-control"
                       id="quantite"
+                      name="quantite"
                       placeholder="Quantité"
+                      [(ngModel)]="nouveauMouvement.quantite"
                     />
                   </div>
                   <div class="mb-3">
@@ -57,10 +75,11 @@
                       name="typeMouvement"
                       id="typeMouvement"
                       class="form-select"
+                      [(ngModel)]="nouveauMouvement.typeMouvement"
                     >
                       <option value="">Choisir le type de correction</option>
-                      <option value="1">CORRECTION POSITIVE</option>
-                      <option value="2">CORRECTION NEGATIVE</option>
+                      <option value="CORRECTION_POS">CORRECTION POSITIVE</option>
+                      <option value="CORRECTION_NEG">CORRECTION NEGATIVE</option>
                     </select>
                   </div>
                 </form>
@@ -75,7 +94,7 @@
             >
               <i class="fa-solid fa-ban"></i>&nbsp; Annuler
             </button>
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveMouvement()">
               <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
             </button>
           </div>

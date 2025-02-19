@@ -16,6 +16,7 @@ public class LigneVenteMapper {
 
     public LigneVente toLigneVente(LigneVenteRequest request){
         return LigneVente.builder()
+                .id(request.id())
                 .quantite(request.quantite())
                 .prixUnitaire(request.prixUnitaire())
                 .build();

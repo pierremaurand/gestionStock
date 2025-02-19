@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgClass, NgFor } from '@angular/common';
 import { Menu } from './menu';
@@ -9,7 +9,7 @@ import { Menu } from './menu';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit{
   menuProperties: Array<Menu> = [
     {
       id: '1',
@@ -117,6 +117,10 @@ export class MenuComponent {
 
   constructor(private router: Router) {}
 
+  ngOnInit(): void {
+
+  }
+
   navigate(menu: Menu): void {
     if (this.lastSelectedMenu) {
       this.lastSelectedMenu.active = false;
@@ -124,5 +128,11 @@ export class MenuComponent {
     menu.active = true;
     this.lastSelectedMenu = menu;
     this.router.navigate([menu.url]);
+  }
+
+  isFirstMenu(id: string|undefined): boolean {
+    if(id && id == '1')
+      return true;
+    return false;
   }
 }

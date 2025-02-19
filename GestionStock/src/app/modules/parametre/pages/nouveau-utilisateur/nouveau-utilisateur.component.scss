@@ -1,4 +1,15 @@
-img{
-  width: 150px;
-  height: 150px;
+.page{
+  height: 100%;
+  overflow: auto;
 }
+
+.image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image img{
+  width: 100%;
+}
+

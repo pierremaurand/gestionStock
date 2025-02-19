@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("categories")
 @RequiredArgsConstructor
@@ -18,7 +20,7 @@ public class CategorieController {
     private final CategorieService service;
 
     @PostMapping
-    public ResponseEntity<Long> save(@Valid @RequestBody CategorieRequest request) {
+    public ResponseEntity<Long> saveCategorie(@Valid @RequestBody CategorieRequest request) {
         return ResponseEntity.ok(service.save(request));
     }
 
@@ -30,22 +32,27 @@ public class CategorieController {
         return ResponseEntity.ok(service.findAll(page, size));
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<List<CategorieResponse>> findCategoriesList(){
+        return ResponseEntity.ok(service.findAllCategoriesList());
+    }
+
     @GetMapping("/id/{id}")
-    public ResponseEntity<CategorieResponse> findById(
+    public ResponseEntity<CategorieResponse> findCategorieById(
             @PathVariable("id") Long id
     ) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<CategorieResponse> findById(
+    public ResponseEntity<CategorieResponse> findCategorieById(
             @PathVariable("code") String code
     ) {
         return ResponseEntity.ok(service.findByCode(code));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteCategorie(@PathVariable("id") Long id){
         service.delete(id);
         return ResponseEntity.accepted().build();
     }

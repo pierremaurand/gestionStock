@@ -1,9 +1,9 @@
+import { ToastService } from './../../services/toast/toast.service';
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import { AuthenticationRequest, AuthenticationResponse } from '../../services/models';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../services/services';
 import { TokenService } from '../../services/token/token.service';
+import { AuthenticationRequest, AuthenticationResponse, AuthenticationService, UtilisateurResponse } from '../../services/openapi';
 
 @Component({
   selector: 'app-login',
@@ -13,25 +13,31 @@ import { TokenService } from '../../services/token/token.service';
 })
 export class LoginComponent {
   authRequest: AuthenticationRequest = {login: "", motDePasse: ""};
-  errorMsg: Array<String> = [];
 
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private toastService: ToastService
   ){}
 
   login(): void {
-    this.authService.login({
-      body: this.authRequest
-    }).subscribe({
+    this.authService.login(this.authRequest)
+    .subscribe({
       next: (res: AuthenticationResponse) => {
-        console.log(res);
         this.tokenService.token = res.token as string;
+        this.tokenService.utilisateur = res.utilisateur as UtilisateurResponse;
+        this.toastService.showSuccess("La connexion de l'utilisateur réussie");
         this.router.navigate(['home']);
       },
       error: (err) => {
-        console.log(err);
+        if (err.error.validationErrors) {
+          err.error.validationErrors.forEach((message: string) => {
+            this.toastService.showWarning(message);
+          });
+        } else {
+          this.toastService.showError(err.error.error);
+        }
       }
     })
   }

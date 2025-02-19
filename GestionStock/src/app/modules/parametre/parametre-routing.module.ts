@@ -26,7 +26,15 @@ const routes: Routes = [
     component: NouvelleCategorieComponent
   },
   {
+    path: 'nouvelle-categorie/:categorieId',
+    component: NouvelleCategorieComponent
+  },
+  {
     path: 'nouveau-utilisateur',
+    component: NouveauUtilisateurComponent
+  },
+  {
+    path: 'nouveau-utilisateur/:utilisateurId',
     component: NouveauUtilisateurComponent
   },
   {

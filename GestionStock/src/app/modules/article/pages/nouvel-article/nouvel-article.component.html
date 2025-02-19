@@ -1,91 +1,126 @@
 <div class="page card">
   <div class="card-body">
-      <div class="row mb-1">
-        <div class="col-md-3 image">
-          <img
-            src="assets/images/product.png"
-            class="rounded-circle"
-            alt="image-article"
-          />
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <div class="card border-0">
+          <div class="card-body image">
+            <button
+              type="button"
+              class="bg-transparent border-0"
+              (click)="inputFile.click()"
+            >
+              <img
+                [src]="selectedPhoto || 'assets/images/product.png'"
+                class="rounded-circle w-100"
+                alt="image-article"
+              />
+            </button>
+            <input
+              (change)="onFileSelected($event)"
+              hidden
+              #inputFile
+              type="file"
+              id="formFile"
+              accept="image/*"
+            />
+          </div>
         </div>
       </div>
-      <h3>
-        <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
-        Informations de l'article
-      </h3>
-      <hr />
-      <div class="row mb-2">
-        <div class="col-md-6 mb-2">
-          <input
-            type="text"
-            class="form-control"
-            name="code"
-            id="code"
-            placeholder="Code article"
-          />
-        </div>
-        <div class="col-md-6 mb-2">
-          <input
-            type="text"
-            class="form-control"
-            name="designation"
-            id="designation"
-            placeholder="Désignation"
-          />
-        </div>
-        <div class="col-md-6 mb-2">
-          <input
-            type="text"
-            class="form-control"
-            name="prixUnitaireHt"
-            id="prixUnitaireHt"
-            placeholder="Prix unitaire HT"
-          />
-        </div>
-        <div class="col-md-6 mb-2">
-          <input
-            type="text"
-            class="form-control"
-            name="tauxTva"
-            id="tauxTva"
-            placeholder="Taux TVA"
-          />
-        </div>
-        <div class="col-md-6 mb-2">
-          <input
-            type="text"
-            class="form-control"
-            name="prixUnitaireTtc"
-            id="prixUnitaireTtc"
-            placeholder="Prix unitaire TTC"
-          />
-        </div>
-        <div class="col-md-6 mb-2">
-          <select
-            name="categorie"
-            id="catégorie"
-            class="form-select"
-            title="categorie"
-          >
-            <option value="">Choisir une catégorie</option>
-            <option value="1">CAT001</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col text-end">
-          <button
-            type="button"
-            class="btn btn-danger me-2"
-            (click)="onCancel()"
-          >
-            <i class="fa-solid fa-ban"></i>&nbsp; Annuler
-          </button>
-          <button type="button" class="btn btn-primary">
-            <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
-          </button>
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="mb-3">
+              <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
+              Informations de l'article
+            </h3>
+            <div class="row mb-3">
+              <div class="col-md-6 mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="code"
+                  id="code"
+                  placeholder="Code article"
+                  [(ngModel)]="articleRequest.code"
+                  disabled
+                />
+              </div>
+              <div class="col-md-6 mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="designation"
+                  id="designation"
+                  placeholder="Désignation"
+                  [(ngModel)]="articleRequest.designation"
+                />
+              </div>
+              <div class="col-md-6 mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="prixUnitaireHt"
+                  id="prixUnitaireHt"
+                  placeholder="Prix unitaire HT"
+                  [(ngModel)]="articleRequest.prixUnitaireHt"
+                  (input)="calculPrixUnitaireTTC()"
+                />
+              </div>
+              <div class="col-md-6 mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="tauxTva"
+                  id="tauxTva"
+                  placeholder="Taux TVA"
+                  [(ngModel)]="articleRequest.tauxTva"
+                  (input)="calculPrixUnitaireTTC()"
+                />
+              </div>
+              <div class="col-md-6 mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="prixTTC"
+                  id="prixTTC"
+                  placeholder="Prix unitaire TTC"
+                  disabled
+                  [value]="prixUnitaireTTC"
+                />
+              </div>
+              <div class="col-md-6 mb-2">
+                <input
+                  type="search"
+                  class="form-control"
+                  placeholder="Catégorie"
+                  [(ngModel)]="codeCategorie"
+                  (input)="filterCategorie()"
+                />
+                <div *ngIf="codeCategorie.length && !categorieNotYetSelected" class="autocomplete shadow p-3 mb-5 bg-white rounded">
+                  <p
+                    class="p-1"
+                    *ngFor="let categorie of categories"
+                    (click)="selectCategorieClick(categorie)"
+                  >
+                    {{ categorie.code }}&nbsp; {{ categorie.designation }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col text-end">
+        <button type="button" class="btn btn-danger me-2" (click)="onCancel()">
+          <i class="fa-solid fa-ban"></i>&nbsp; Annuler
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveArticle()">
+          <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

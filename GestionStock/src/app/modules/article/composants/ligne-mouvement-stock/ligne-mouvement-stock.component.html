@@ -1,0 +1,90 @@
+<div class="card">
+  <div class="card-header bg-transparent accordion-header" id="article{{article.id}}">
+    <div class="row">
+      <div class="col-md-2 border-2 border-end">
+        <img [src]="articlePhoto" class="w-100" alt="images-article" />
+      </div>
+      <div class="col-md-7 d-flex justify-content-center align-items-center">
+        <div class="row h-100">
+          <div class="col-md-6 border-2 border-end d-flex justify-content-center align-items-center">
+            <div class="row">
+              <div class="col-md-12">
+                <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
+                {{ article.code }}
+              </div>
+              <div class="col-md-12">
+                <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
+                {{ article.designation }}
+              </div>
+              <div class="col-md-12">
+                <i class="fa-solid fa-dollar-sign text-primary"></i>&nbsp;
+                {{ article.prixUnitaireHt }} FCFA
+              </div>
+              <div class="col-md-12">
+                <i class="fa-solid fa-dollar-sign text-primary"></i>&nbsp;
+                {{ article.prixUnitaireTtc }} FCFA
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-6 border-2 border-end d-flex justify-content-center align-items-center"
+          >
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-md-2">
+                <i class="fa-brands fa-dropbox fs-3 text-primary"></i>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h4 class="text-center">Stock actuel</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <h4 class="text-center">{{ stock }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex justify-content-center align-items-center">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-md-6">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#correctionStockModal"
+              (click)="correctStockClicked()"
+            >
+              <i class="fa-brands fa-stack-overflow"></i>
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapseArticle' + article.id"
+              aria-expanded="false"
+              [attr.aria-controls]="'collapseArticle' + article.id"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="collapseArticle{{ article.id }}"
+    class="accordion-collapse collapse card-body"
+    [attr.aria-labelledby]="'article' + article.id"
+    data-bs-parent="#accordionArticle"
+  >
+    <div class="accordion-body">
+      <app-details-mouvement-stock
+        *ngFor="let mouvement of mouvements"
+        [mouvement]="mouvement"
+      ></app-details-mouvement-stock>
+    </div>
+  </div>
+</div>

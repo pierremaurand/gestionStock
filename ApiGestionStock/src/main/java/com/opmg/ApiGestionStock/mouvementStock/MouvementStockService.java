@@ -36,35 +36,14 @@ public class MouvementStockService {
         return repository.save(mouvementStock).getId();
     }
 
-    public PageResponse<MouvementStockResponse> findAll(int page, int size){
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
-        Page<MouvementStock> mouvementStocks = repository.findAll(pageable);
-        List<MouvementStockResponse> mouvementStockResponses = mouvementStocks.stream().map(mapper::toMouvementStockResponse).toList();
-        return new PageResponse<>(
-                mouvementStockResponses,
-                mouvementStocks.getNumber(),
-                mouvementStocks.getSize(),
-                mouvementStocks.getTotalElements(),
-                mouvementStocks.getTotalPages(),
-                mouvementStocks.isFirst(),
-                mouvementStocks.isLast()
-        );
+    public List<MouvementStockResponse> findAll(){
+        return repository.findAll().stream()
+                .map(mapper::toMouvementStockResponse)
+                .toList();
     }
 
-    public PageResponse<MouvementStockResponse> findAllByArticle(int page, int size, Long id){
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
-        Article article = articleService.getArticleById(id);
-        Page<MouvementStock> mouvementStocks = repository.findAllByIdIn(article.getMouvementStocksIds(),pageable);
-        List<MouvementStockResponse> mouvementStockResponses = mouvementStocks.stream().map(mapper::toMouvementStockResponse).toList();
-        return new PageResponse<>(
-                mouvementStockResponses,
-                mouvementStocks.getNumber(),
-                mouvementStocks.getSize(),
-                mouvementStocks.getTotalElements(),
-                mouvementStocks.getTotalPages(),
-                mouvementStocks.isFirst(),
-                mouvementStocks.isLast()
-        );
+    public MouvementStockResponse findMouvementStockById(Long id) {
+        return mapper.toMouvementStockResponse(getMouvementStockById(id));
     }
 
     public Double stockReelByArticle(Long id){
@@ -96,6 +75,7 @@ public class MouvementStockService {
                 .typeMouvement(TypeMouvement.SORTIE)
                 .quantite(ligneVente.getQuantite())
                 .article(article)
+                .provenance(Provenance.VENTE)
                 .build();
         repository.save(mouvementStock);
     }
@@ -107,6 +87,7 @@ public class MouvementStockService {
                 .typeMouvement(TypeMouvement.SORTIE)
                 .quantite(ligneCommandeClient.getQuantite())
                 .article(article)
+                .provenance(Provenance.COMMANDE_CLIENT)
                 .build();
         repository.save(mouvementStock);
     }
@@ -118,6 +99,7 @@ public class MouvementStockService {
                 .typeMouvement(TypeMouvement.ENTREE)
                 .quantite(ligneCommandeFournisseur.getQuantite())
                 .article(article)
+                .provenance(Provenance.COMMANDE_FOURNISSEUR)
                 .build();
         repository.save(mouvementStock);
     }

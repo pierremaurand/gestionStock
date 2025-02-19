@@ -3,6 +3,7 @@ package com.opmg.ApiGestionStock.categorie;
 import com.opmg.ApiGestionStock.common.PageResponse;
 import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
+import com.opmg.ApiGestionStock.exception.InvalidOperationException;
 import com.opmg.ApiGestionStock.handler.BusinessErrorCodes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.CATEGORIE_NOT_FOUND;
+import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.CATEGORIE_OPERATION_NOT_PERMIT;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class CategorieService {
 
     public Long save(CategorieRequest request) {
         boolean exists = repository.existsByCode(request.code());
-        if (exists) {
+        if (exists && request.id() == null) {
             log.error("Categorie already exists in the data base");
             throw new InvalidEntityException(BusinessErrorCodes.CODE_CATEGORIE_ALREADY_EXISTS);
         }
@@ -70,6 +72,14 @@ public class CategorieService {
         Categorie categorie = getCategorieById(id);
         if(categorie.getArticlesIds().isEmpty()){
             repository.deleteById(id);
+        }else {
+            throw new InvalidOperationException(CATEGORIE_OPERATION_NOT_PERMIT);
         }
+    }
+
+    public List<CategorieResponse> findAllCategoriesList(){
+        return repository.findAll().stream()
+                .map(mapper::toCategorieResponse)
+                .toList();
     }
 }

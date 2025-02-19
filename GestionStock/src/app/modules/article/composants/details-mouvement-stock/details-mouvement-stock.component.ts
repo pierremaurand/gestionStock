@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MouvementStockResponse } from '../../../../services/openapi';
 
 @Component({
   selector: 'app-details-mouvement-stock',
@@ -7,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './details-mouvement-stock.component.scss'
 })
 export class DetailsMouvementStockComponent {
+  private _mouvement: MouvementStockResponse = {};
 
+  get mouvement() {
+    return this._mouvement;
+  }
+
+  @Input()
+  set mouvement(value: MouvementStockResponse) {
+    this._mouvement = value;
+  }
 }

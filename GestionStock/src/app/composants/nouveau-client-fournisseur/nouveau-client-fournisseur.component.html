@@ -1,63 +1,175 @@
-<div class="row mb-3">
-  <div class="col-md-12">
-    <img
-      src="assets/images/profil.png"
-      class="rounded-circle"
-      alt="image-article"
-    />
-  </div>
-</div>
-<div class="card mb-3">
+<div class="card page">
   <div class="card-body">
-    <h3 class="card-title mb-3">
-      <i class="fa-solid fa-circle-info blue-color"></i>&nbsp;Informations du
-      {{origin}}
-    </h3>
-    <div class="row">
-      <div class="col-md-6 mb-2">
-        <input
-          type="text"
-          class="form-control"
-          name="nom"
-          id="nom"
-          placeholder="Nom"
-        />
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <div class="card border-0">
+          <div class="card-body image">
+            <button
+              type="button"
+              class="bg-transparent border-0"
+              (click)="inputFile.click()"
+            >
+              <img
+                [src]="selectedPhoto || 'assets/images/profil.png'"
+                class="rounded-circle"
+                alt="image-article"
+              />
+            </button>
+            <input
+              (change)="onFileSelected($event)"
+              type="file"
+              hidden
+              #inputFile
+              id="formFile"
+              accept="image/*"
+            />
+          </div>
+        </div>
       </div>
-      <div class="col-md-6 mb-2">
-        <select name="sexe" id="sexe" class="form-select" title="sexe">
-          <option value="">Choisir un sexe</option>
-          <option value="1">Masculin</option>
-          <option value="2">Féminin</option>
-        </select>
-      </div>
-      <div class="col-md-6 mb-2">
-        <input
-          type="text"
-          class="form-control"
-          name="nomeroTel"
-          id="numeroTel"
-          placeholder="Numéro de téléphone"
-        />
-      </div>
-      <div class="col-md-6 mb-2">
-        <input
-          type="email"
-          class="form-control"
-          name="email"
-          id="email"
-          placeholder="Email"
-        />
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-3">
+                  <i class="fa-solid fa-circle-info text-primary"></i
+                  >&nbsp;Informations du {{origin}}
+                </h4>
+                <div class="row mb-3">
+                  <div class="col-md-12 mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="nom"
+                      id="nom"
+                      placeholder="Nom"
+                      [(ngModel)]="clientFournisseurRequest.nom"
+                    />
+                  </div>
+                  <div class="col-md-12 mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="numeroCNG"
+                      id="numeroCNI"
+                      placeholder="Numéro CNI"
+                      [(ngModel)]="clientFournisseurRequest.numeroCNI"
+                    />
+                  </div>
+                  <div class="col-md-12 mb-2">
+                    <select
+                      name="sexe"
+                      id="sexe"
+                      class="form-select"
+                      title="sexe"
+                      [(ngModel)]="clientFournisseurRequest.sexe"
+                    >
+                      <option value="">Choisir un sexe</option>
+                      <option value="MASCULIN">Masculin</option>
+                      <option value="FEMININ">Feminin</option>
+                    </select>
+                  </div>
+                  <div class="col-md-12 mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="numeroTel"
+                      id="numeroTel"
+                      placeholder="Numéro de téléphone"
+                      [(ngModel)]="clientFournisseurRequest.numeroTel"
+                    />
+                  </div>
+                  <div class="col-md-12">
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      id="email"
+                      placeholder="Adresse Email"
+                      [(ngModel)]="clientFournisseurRequest.email"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-3">
+                  <i class="fa-solid fa-home text-primary"></i>&nbsp;Adresse du {{origin}}
+                </h4>
+                <div class="row mb-3">
+                  <div class="col-md-12 mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="adresse1"
+                      id="adresse1"
+                      placeholder="Adresse 1"
+                      [(ngModel)]="adresse.adresse1"
+                    />
+                  </div>
+                  <div class="col-md-12 mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="adresse2"
+                      id="adresse2"
+                      placeholder="Adresse 2"
+                      [(ngModel)]="adresse.adresse2"
+                    />
+                  </div>
+                  <div class="col-md-12 mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="ville"
+                      id="ville"
+                      placeholder="Ville"
+                      [(ngModel)]="adresse.ville"
+                    />
+                  </div>
+                  <div class="col-md-12 mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="codePostale"
+                      id="codePostale"
+                      placeholder="Code postale"
+                      [(ngModel)]="adresse.codePostale"
+                    />
+                  </div>
+                  <div class="col-md-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="pays"
+                      id="pays"
+                      placeholder="Pays"
+                      [(ngModel)]="adresse.pays"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col text-end">
-    <button type="button" class="btn btn-danger me-2" (click)="onCancel()">
-      <i class="fa-solid fa-ban"></i>&nbsp; Annuler
-    </button>
-    <button type="button" class="btn btn-primary">
-      <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
-    </button>
+    <div class="row">
+      <div class="col text-end">
+        <button type="button" class="btn btn-danger me-2" (click)="onCancel()">
+          <i class="fa-solid fa-ban"></i>&nbsp; Annuler
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="save()"
+        >
+          <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
+        </button>
+      </div>
+    </div>
   </div>
 </div>

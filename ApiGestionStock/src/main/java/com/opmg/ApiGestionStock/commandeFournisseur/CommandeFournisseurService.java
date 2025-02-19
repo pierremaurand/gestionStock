@@ -39,7 +39,7 @@ public class CommandeFournisseurService {
 
     public Long save(@Valid CommandeFournisseurRequest request) {
         boolean existsCode = repository.existsByCode(request.code());
-        if (existsCode) {
+        if (existsCode && request.id() == null) {
             log.error("Cade already use CODE:: {}", request.code());
             throw new InvalidEntityException(CODE_COMMANDE_FOURNISSEUR_ALREADY_EXISTS);
         }

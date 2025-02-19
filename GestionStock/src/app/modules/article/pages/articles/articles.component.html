@@ -2,24 +2,35 @@
   <div class="card-body page-body">
     <div class="page-header">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
           <h1 class="h3">Liste des articles</h1>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
           <app-bouttons-action
             (clickEvent)="nouvelArticle()"
           ></app-bouttons-action>
         </div>
       </div>
     </div>
-    <div class="page-content">
-      <app-details-article
-        *ngFor="let article of articleResponse.content"
-        [article]="article"
-      ></app-details-article>
+    <div class="row">
+      <div class="col-md-12">
+        <app-pagination
+          [page]="page"
+          [pages]="pages"
+          [totalPages]="articleResponse.totalPages"
+          (goToPageEvent)="goToPage($event)"
+        ></app-pagination>
+      </div>
     </div>
-    <div class="page-footer">
-      <app-pagination></app-pagination>
+    <div class="row">
+      <div class="col-md-12 mb-1" *ngFor="let article of articleResponse.content">
+        <app-ligne-article
+          [article]="article"
+          (edit)="edit($event)"
+          (delete)="delete($event)"
+          (details)="details($event)"
+        ></app-ligne-article>
+      </div>
     </div>
   </div>
 </div>

@@ -6,13 +6,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record AuthenticationRequest(
-        @NotNull(message = "200")
-        @NotEmpty(message = "200")
-        @NotBlank(message = "200")
+        @NotNull(message = "Le login est obligatoire")
+        @NotEmpty(message = "Le login est obligatoire")
+        @NotBlank(message = "Le login est obligatoire")
         String login,
-        @NotNull(message = "201")
-        @NotEmpty(message = "201")
-        @NotBlank(message = "201")
+        @NotNull(message = "Le mot de passe est obligatoire")
+        @NotEmpty(message = "Le mot de passe est obligatoire")
+        @NotBlank(message = "Le mot de passe est obligatoire")
         String motDePasse
 ) {
 }

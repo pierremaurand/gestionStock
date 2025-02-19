@@ -47,7 +47,7 @@ public class Article extends BaseEntity {
 
     @Transient
     public Double getPrixUnitaireTtc() {
-        return (1 - tauxTva / 100) * prixUnitaireHt;
+        return (double) (Math.round((1 + tauxTva / 100) * prixUnitaireHt)*100)/100;
     }
 
     @Transient

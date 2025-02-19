@@ -20,5 +20,6 @@ public class MouvementStockResponse {
     private LocalDate dateMouvement;
     private Double quantite;
     private TypeMouvement typeMouvement;
+    private Provenance provenance;
     private Long article;
 }

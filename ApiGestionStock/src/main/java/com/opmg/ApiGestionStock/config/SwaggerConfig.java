@@ -15,8 +15,10 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenApi() {
         return new OpenAPI()
-                .info(new Info().title("Gestion de stock REST API"))
+                .info(new Info()
+                        .title("Gestion de stock REST API")
+                        .version("1.0"))
                 .addSecurityItem(new SecurityRequirement().addList("JavaInUseSecurityScheme"))
-                .components(new Components().addSecuritySchemes("JavaInUseSecurityScheme", new SecurityScheme().name("JavaInUseSecurityScheme").type(SecurityScheme.Type.HTTP).scheme("bearer")));
+                .components(new Components().addSecuritySchemes("JavaInUseSecurityScheme", new SecurityScheme().name("JavaInUseSecurityScheme").type(SecurityScheme.Type.HTTP).scheme("basic")));
     }
 }

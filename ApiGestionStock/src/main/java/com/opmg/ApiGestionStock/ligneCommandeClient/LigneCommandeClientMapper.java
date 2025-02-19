@@ -13,6 +13,7 @@ public class LigneCommandeClientMapper {
 
     public LigneCommandeClient toLigneCommandeClient(LigneCommandeClientRequest request){
         return LigneCommandeClient.builder()
+                .id(request.id())
                 .quantite(request.quantite())
                 .prixUnitaire(request.prixUnitaire())
                 .build();

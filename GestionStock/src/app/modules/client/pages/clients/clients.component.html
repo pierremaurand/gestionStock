@@ -1,16 +1,36 @@
-<div class="d-flex flex-column gap-1">
-  <div class="row page-header">
-    <div class="col-md-7 title">
-      <h1 class="h2">Liste des clients</h1>
+<div class="card page">
+  <div class="card-body page-body">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="h3">Liste des clients</h1>
+        </div>
+        <div class="col-md-5">
+          <app-bouttons-action
+            (clickEvent)="nouveauClient()"
+          ></app-bouttons-action>
+        </div>
+      </div>
     </div>
-    <div class="col-md-5 actions text-end">
-      <app-bouttons-action (clickEvent)="nouveauClient()"></app-bouttons-action>
+    <div class="row">
+      <div class="col-md-12">
+        <app-pagination
+          [page]="page"
+          [pages]="pages"
+          [totalPages]="clientResponse.totalPages"
+          (goToPageEvent)="goToPage($event)"
+        ></app-pagination>
+      </div>
     </div>
-  </div>
-  <div class="page-content">
-    <app-details-client-fournisseur></app-details-client-fournisseur>
-  </div>
-  <div class="page-pagination">
-    <app-pagination></app-pagination>
+    <div class="row">
+      <div class="col-md-12 mb-1" *ngFor="let client of clientResponse.content">
+        <app-ligne-client
+          [client]="client"
+          (delete)="onDelete($event)"
+          (details)="onDetails($event)"
+          (edit)="onEdit($event)"
+        ></app-ligne-client>
+      </div>
+    </div>
   </div>
 </div>

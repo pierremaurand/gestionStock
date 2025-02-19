@@ -1,18 +1,51 @@
 <div class="card mb-1">
   <div class="card-body">
     <div class="row">
-      <div class="col-md-2 text-center border-right">
+      <div class="col-md-2 text-center border-2 border-end">
         <i class="fa-solid fa-calendar-days"></i>&nbsp;
-        12/12/2025
+        {{ mouvement.dateMouvement }}
       </div>
-      <div class="col-md-3 text-center text-danger border-right">19</div>
-      <div class="col-md-3 text-center text-danger border-right">
-        <i class="fa-solid fa-square-minus"></i>&nbsp;
-        SORTIE
+      <div
+        class="col-md-3 text-center border-2 border-end"
+        [class.text-danger]="
+          mouvement.typeMouvement == 'SORTIE' ||
+          mouvement.typeMouvement == 'CORRECTION_NEG'
+        "
+        [class.text-success]="
+          mouvement.typeMouvement == 'ENTREE' ||
+          mouvement.typeMouvement == 'CORRECTION_POS'
+        "
+      >
+        {{ mouvement.quantite }}
       </div>
-      <div class="col-md-4 text-center">
+      <div
+        class="col-md-3 text-center border-2 border-end"
+        [class.text-danger]="
+          mouvement.typeMouvement == 'SORTIE' ||
+          mouvement.typeMouvement == 'CORRECTION_NEG'
+        "
+        [class.text-success]="
+          mouvement.typeMouvement == 'ENTREE' ||
+          mouvement.typeMouvement == 'CORRECTION_POS'
+        "
+      >
+        <i
+          class="fa-solid"
+          [class.fa-square-minus]="
+            mouvement.typeMouvement == 'SORTIE' ||
+            mouvement.typeMouvement == 'CORRECTION_NEG'
+          "
+          [class.fa-square-plus]="
+            mouvement.typeMouvement == 'ENTREE' ||
+            mouvement.typeMouvement == 'CORRECTION_POS'
+          "
+        ></i
+        >&nbsp;
+        {{ mouvement.typeMouvement }}
+      </div>
+      <div class="col-md-4 text-center text-primary">
         <i class="fa-solid fa-user"></i>&nbsp;
-        COMMANDE CLIENT
+        {{ mouvement.provenance }}
       </div>
     </div>
   </div>

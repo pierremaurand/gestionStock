@@ -1,5 +1,6 @@
 package com.opmg.ApiGestionStock.utilisateur;
 
+import com.opmg.ApiGestionStock.common.Adresse;
 import com.opmg.ApiGestionStock.common.BaseEntity;
 import com.opmg.ApiGestionStock.common.Sexe;
 import com.opmg.ApiGestionStock.role.Role;
@@ -22,7 +23,11 @@ public class Utilisateur extends BaseEntity {
     private String login;
     private String motDePasse;
     private Sexe sexe;
+    private String numeroTel;
+    private String email;
     private String photo;
+    @Embedded
+    private Adresse adresse;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

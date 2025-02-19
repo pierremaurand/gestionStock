@@ -4,8 +4,7 @@ import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
 import com.opmg.ApiGestionStock.role.Role;
 import com.opmg.ApiGestionStock.role.RoleRepository;
-import com.opmg.ApiGestionStock.utilisateur.Utilisateur;
-import com.opmg.ApiGestionStock.utilisateur.UtilisateurRepository;
+import com.opmg.ApiGestionStock.utilisateur.*;
 import com.opmg.ApiGestionStock.service.JWTService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,20 +23,26 @@ import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.USERNAME_ALREA
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UtilisateurRepository utilisateurRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UtilisateurService utilisateurService;
+    private final UtilisateurMapper mapper;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
 
-    public String verify(AuthenticationRequest request) {
+    public AuthenticationResponse verify(AuthenticationRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.login(), request.motDePasse())
         );
 
+        UtilisateurResponse utilisateur = mapper.toUtilisateurResponse(
+                utilisateurService.getUtilisateurByLogin(request.login())
+        );
+
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(request.login());
+            return AuthenticationResponse.builder()
+                    .utilisateur(utilisateur)
+                    .token(jwtService.generateToken(request.login()))
+                    .build();
         }
-        return "Fail";
+        return null;
     }
 }

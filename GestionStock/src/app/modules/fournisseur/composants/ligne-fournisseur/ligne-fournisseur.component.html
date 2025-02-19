@@ -1,0 +1,87 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <!-- Image -->
+      <div class="col-md-2 border-end border-2 text-center">
+        <img [src]="fournisseurPhoto" class="w-100" alt="images-article" />
+      </div>
+      <div class="col-md-7 d-flex justify-content-center align-items-center">
+        <div class="row h-100">
+          <!-- Infos personnel -->
+          <div class="col-md-6 border-end border-2 d-flex justify-content-center align-items-center ">
+            <div class="row">
+              <div class="col-md-12">
+                <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
+                {{ fournisseur.nom }}
+              </div>
+              <div class="col-md-12">
+                <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
+                {{ fournisseur.sexe }}
+              </div>
+              <div class="col-md-12">
+                <i class="fa-solid fa-square-phone text-primary"></i>&nbsp;
+                {{ fournisseur.numeroTel }}
+              </div>
+              <div class="col-md-12">
+                <i class="fa-solid fa-at text-primary"></i>&nbsp;
+                {{ fournisseur.email }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Infos localisation  -->
+          <div class="col-md-6 border-end border-2 d-flex justify-content-center align-items-center">
+            <div class="row">
+              <div class="col-md-12">
+                <i class="fa-solid fa-home text-primary"></i>&nbsp;
+                {{fournisseur.adresse?.adresse1}}&nbsp;{{fournisseur.adresse?.adresse2}}
+              </div>
+              <div class="col-md-12">
+                <i class="fa-solid fa-location-dot text-primary"></i>&nbsp;
+                {{fournisseur.adresse?.codePostale}}&nbsp;
+                {{fournisseur.adresse?.ville}}
+              </div>
+              <div class="col-md-12">
+                <i class="fa-solid fa-earth-africa text-primary"></i>&nbsp;
+                {{fournisseur.adresse?.pays}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bouttons d'actions -->
+      <div class="col-md-3 d-flex justify-content-center align-items-center">
+        <div class="row">
+          <div class="col-md-4">
+            <button
+              type="button"
+              (click)="onEdit()"
+              class="btn btn-warning btn-sm"
+            >
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+          </div>
+          <div class="col-md-4">
+            <button
+              type="button"
+              (click)="onDelete()"
+              class="btn btn-danger btn-sm"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+          <div class="col-md-4">
+            <button
+              type="button"
+              (click)="onDetails()"
+              class="btn btn-primary btn-sm"
+            >
+              <i class="fa-solid fa-table-list"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

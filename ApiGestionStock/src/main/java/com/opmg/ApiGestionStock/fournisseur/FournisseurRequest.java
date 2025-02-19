@@ -1,23 +1,29 @@
 package com.opmg.ApiGestionStock.fournisseur;
 
+import com.opmg.ApiGestionStock.common.AdresseRequest;
 import com.opmg.ApiGestionStock.common.Sexe;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record FournisseurRequest(
-        @NotNull(message = "700")
-        @NotEmpty(message = "700")
-        @NotBlank(message = "700")
+        Long id,
+        @NotNull(message = "Le nom du fournisseur est obligatoire")
+        @NotEmpty(message = "Le nom du fournisseur est obligatoire")
+        @NotBlank(message = "Le nom du fournisseur est obligatoire")
         String nom,
         String numeroCNI,
         Sexe sexe,
-        @NotNull(message = "701")
-        @NotEmpty(message = "701")
-        @NotBlank(message = "701")
+        @NotNull(message = "Le numéro de téléphone du fournisseur est obligatoire")
+        @NotEmpty(message = "Le numéro de téléphone du fournisseur est obligatoire")
+        @NotBlank(message = "Le numéro de téléphone du fournisseur est obligatoire")
         String numeroTel,
-        @Email(message = "702")
-        String email
+        @Email(message = "L'adresse email du fournisseur est invalid")
+        String email,
+        @Valid
+        @NotNull(message = "L'adresse du fournisseur est obligatoire")
+        AdresseRequest adresse
 ) {
 }

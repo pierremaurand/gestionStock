@@ -28,7 +28,6 @@ public class LigneCommandeFournisseurService {
 
     public LigneCommandeFournisseur save(LigneCommandeFournisseurRequest request, CommandeFournisseur commandeFournisseur){
         Article article = articleService.getArticleById(request.article());
-
         LigneCommandeFournisseur ligneCommandeFournisseur = mapper.toLigneCommandeFournisseur(request);
         ligneCommandeFournisseur.setCommandeFournisseur(commandeFournisseur);
         ligneCommandeFournisseur.setArticle(article);

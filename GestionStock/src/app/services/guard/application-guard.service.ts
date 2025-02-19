@@ -22,6 +22,7 @@ export class ApplicationGuardService implements CanActivate {
     if (this.isUserLoggedAndTokenValid()) {
       return true;
     }
+    this.tokenService.logout();
     this.router.navigate(['login']);
     return false;
   }
@@ -29,7 +30,8 @@ export class ApplicationGuardService implements CanActivate {
   isUserLoggedAndTokenValid(): boolean {
     const token = this.tokenService.token;
     if (token) {
-      return true;
+      const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+      return expiry * 1000 > Date.now();
     }
     return false;
   }

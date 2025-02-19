@@ -23,6 +23,7 @@ public class MouvementStock extends BaseEntity {
     private LocalDate dateMouvement;
     private Double quantite;
     private TypeMouvement typeMouvement;
+    private Provenance provenance;
     @ManyToOne
     private Article article;
 

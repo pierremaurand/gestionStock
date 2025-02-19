@@ -1,6 +1,7 @@
 package com.opmg.ApiGestionStock.utilisateur;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.opmg.ApiGestionStock.common.AdresseResponse;
 import com.opmg.ApiGestionStock.common.Sexe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +21,8 @@ public class UtilisateurResponse {
     private String nom;
     private String login;
     private Sexe sexe;
+    private String numeroTel;
+    private String email;
     private byte[] photo;
+    private AdresseResponse adresse;
 }

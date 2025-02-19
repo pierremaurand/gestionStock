@@ -4,17 +4,15 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 public record LigneVenteRequest(
-        @NotNull(message = "1000")
-        @Min(value = 1, message = "1001")
+        Long id,
+        @NotNull(message = "Aucun article n'a été selectionné")
+        @Min(value = 1, message = "L'article selectionné est invalid")
         Long article,
-        @NotNull(message = "1002")
-        @Min(value = 1, message = "1003")
+        @NotNull(message = "Aucune quantité n'a été renseigné")
+        @Min(value = 1, message = "La quantité doit être supérieur ou &gal à 1")
         Double quantite,
-        @NotNull(message = "1004")
-        @Min(value = 1, message = "1005")
-        Double prixUnitaire,
-        @NotNull(message = "1006")
-        @Min(value = 1, message = "1007")
-        Long vente
+        @NotNull(message = "Aucun prix unitaire n'a été renseigné")
+        @Min(value = 1, message = "Le prix unitaire doit être supérieur ou &gal à 1")
+        Double prixUnitaire
 ) {
 }

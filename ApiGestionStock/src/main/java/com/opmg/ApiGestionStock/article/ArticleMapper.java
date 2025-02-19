@@ -12,6 +12,7 @@ public class ArticleMapper {
 
     public Article toArticle(ArticleRequest request) {
         return Article.builder()
+                .id(request.id())
                 .code(request.code())
                 .designation(request.designation())
                 .prixUnitaireHt(request.prixUnitaireHt())

@@ -13,6 +13,7 @@ public class LigneCommandeFournisseurMapper {
 
     public LigneCommandeFournisseur toLigneCommandeFournisseur(LigneCommandeFournisseurRequest request){
         return LigneCommandeFournisseur.builder()
+                .id(request.id())
                 .quantite(request.quantite())
                 .prixUnitaire(request.prixUnitaire())
                 .build();

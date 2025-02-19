@@ -16,12 +16,12 @@ public class VenteController {
     private final VenteService service;
 
     @PostMapping
-    public ResponseEntity<Long> save(@Valid @RequestBody VenteRequest request){
+    public ResponseEntity<Long> saveVente(@Valid @RequestBody VenteRequest request){
         return ResponseEntity.ok(service.save(request));
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<VenteResponse>> findAll(
+    public ResponseEntity<PageResponse<VenteResponse>> findAllVentes(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
     ){
@@ -29,7 +29,7 @@ public class VenteController {
     }
 
     @GetMapping("/lignes-vente")
-    public ResponseEntity<PageResponse<LigneVenteResponse>> findAllLigneVente(
+    public ResponseEntity<PageResponse<LigneVenteResponse>> findAllLigneVentes(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
     ){
@@ -37,7 +37,7 @@ public class VenteController {
     }
 
     @GetMapping("/lignes-vente/vente/{id}")
-    public ResponseEntity<PageResponse<LigneVenteResponse>> findAllLigneVenteByVente(
+    public ResponseEntity<PageResponse<LigneVenteResponse>> findAllLigneVentesByVente(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             @PathVariable("id") Long id
@@ -46,7 +46,7 @@ public class VenteController {
     }
 
     @GetMapping("/lignes-vente/article/{id}")
-    public ResponseEntity<PageResponse<LigneVenteResponse>> findAllLigneVenteByArticle(
+    public ResponseEntity<PageResponse<LigneVenteResponse>> findAllLigneVentesByArticle(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             @PathVariable("id") Long id

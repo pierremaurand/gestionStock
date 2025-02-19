@@ -1,6 +1,9 @@
 package com.opmg.ApiGestionStock.utilisateur;
 
+import com.opmg.ApiGestionStock.common.Adresse;
+import com.opmg.ApiGestionStock.common.AdresseMapper;
 import com.opmg.ApiGestionStock.common.PageResponse;
+import com.opmg.ApiGestionStock.common.Sexe;
 import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
 import com.opmg.ApiGestionStock.exception.InvalidOperationException;
@@ -28,18 +31,28 @@ public class UtilisateurService {
     private final PasswordEncoder passwordEncoder;
     private final UtilisateurRepository repository;
     private final UtilisateurMapper mapper;
+    private final AdresseMapper adresseMapper;
     private final RoleService roleService;
     private final FileStorageService fileStorageService;
 
     public Long save(UtilisateurRequest request){
-        if(repository.existsByLogin(request.login())){
+        if(repository.existsByLogin(request.login()) && request.id() == null){
             log.error("Login is already use");
             throw new InvalidEntityException(UTILISATEUR_NOT_VALID);
         }
         Utilisateur utilisateur = mapper.toUtilisateur(request);
-        Role userRole = roleService.getRoleByName("USER");
-        utilisateur.setRoles(List.of(userRole));
-        utilisateur.setMotDePasse(passwordEncoder.encode("user"));
+        if(request.id() == null) {
+            Role userRole = roleService.getRoleByName("USER");
+            utilisateur.setRoles(List.of(userRole));
+            utilisateur.setMotDePasse(passwordEncoder.encode("user"));
+        } else {
+            utilisateur = getUtilisateurById(request.id());
+            utilisateur.setNom(request.nom());
+            utilisateur.setSexe(request.sexe());
+            utilisateur.setNumeroTel(request.numeroTel());
+            utilisateur.setEmail(request.email());
+            utilisateur.setAdresse(adresseMapper.toAdresse(request.adresse()));
+        }
         return repository.save(utilisateur).getId();
     }
 
@@ -89,6 +102,16 @@ public class UtilisateurService {
             repository.save(
                     Utilisateur.builder()
                             .login("admin")
+                            .sexe(Sexe.MASCULIN)
+                            .nom("OVASSA Pierre Maurand")
+                            .email("pierremaurand@gmail.com")
+                            .numeroTel("65214415")
+                            .adresse(Adresse.builder()
+                                    .adresse1("Abena")
+                                    .ville("N'Djaména")
+                                    .pays("Tchad")
+                                    .codePostale("00235")
+                                    .build())
                             .motDePasse(passwordEncoder.encode("admin"))
                             .roles(List.of(adminRole))
                             .build()

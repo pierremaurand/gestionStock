@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("mouvements-stock")
@@ -14,30 +16,21 @@ import org.springframework.web.bind.annotation.*;
 public class MouvementStockController {
     private final MouvementStockService service;
 
-    @GetMapping("/article/stock-reel/{id}")
-    public ResponseEntity<Double> getStockReelByArticle(@PathVariable("id") Long id){
-        return ResponseEntity.ok(service.stockReelByArticle(id));
-    }
-
     @PostMapping
-    public ResponseEntity<Long> save(@Valid @RequestBody MouvementStockRequest request){
+    public ResponseEntity<Long> saveMouvementStock(@Valid @RequestBody MouvementStockRequest request){
         return ResponseEntity.ok(service.save(request));
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<MouvementStockResponse>> findAll(
-            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "size", defaultValue = "10", required = false) int size
-    ){
-        return ResponseEntity.ok(service.findAll(page, size));
+    public ResponseEntity<List<MouvementStockResponse>> findAllMouvementStocks(){
+        return ResponseEntity.ok(service.findAll());
     }
 
-    @GetMapping("/article/{id}")
-    public ResponseEntity<PageResponse<MouvementStockResponse>> findAllByArticle(
-            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "size", defaultValue = "10", required = false) int size,
+    @GetMapping("/id/{id}")
+    public ResponseEntity<MouvementStockResponse> findMouvementStockById(
             @PathVariable("id") Long id
-    ){
-        return ResponseEntity.ok(service.findAllByArticle(page, size, id));
+    ) {
+        return ResponseEntity.ok(service.findMouvementStockById(id));
     }
+
 }

@@ -20,9 +20,7 @@ public class AuthenticationController {
     @PostMapping("login")
     public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(
-                AuthenticationResponse.builder()
-                        .token(authenticationService.verify(request))
-                        .build()
+                authenticationService.verify(request)
         );
     }
 }

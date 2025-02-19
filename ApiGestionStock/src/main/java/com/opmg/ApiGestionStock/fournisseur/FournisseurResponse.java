@@ -1,6 +1,7 @@
 package com.opmg.ApiGestionStock.fournisseur;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.opmg.ApiGestionStock.common.AdresseResponse;
 import com.opmg.ApiGestionStock.common.Sexe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +22,7 @@ public class FournisseurResponse {
     private Sexe sexe;
     private String numeroTel;
     private String email;
+    private byte[] photo;
     private List<Long> commandeFournisseurs;
+    private AdresseResponse adresse;
 }

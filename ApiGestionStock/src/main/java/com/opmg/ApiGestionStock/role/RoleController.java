@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("roles")
 @Tag(name = "Role")
@@ -17,12 +15,12 @@ public class RoleController {
     private final RoleService service;
 
     @PostMapping
-    public ResponseEntity<Long> save(@Valid @RequestBody RoleRequest request) {
+    public ResponseEntity<Long> saveRole(@Valid @RequestBody RoleRequest request) {
         return ResponseEntity.ok(service.save(request));
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<RoleResponse>> findAll(
+    public ResponseEntity<PageResponse<RoleResponse>> findAllRoles(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
     ) {
@@ -30,23 +28,16 @@ public class RoleController {
     }
 
     @GetMapping("/filtre/id/{role-id}")
-    public ResponseEntity<RoleResponse> findById(
+    public ResponseEntity<RoleResponse> findRoleById(
             @PathVariable("role-id") Long roleId
     ) {
         return ResponseEntity.ok(service.findById(roleId));
     }
 
     @GetMapping("/filtre/name/{role-name}")
-    public ResponseEntity<RoleResponse> findByName(
+    public ResponseEntity<RoleResponse> findRoleByName(
             @PathVariable("role-name") String roleName
     ) {
         return ResponseEntity.ok(service.findByName(roleName));
-    }
-
-    @PatchMapping("/update/name")
-    public ResponseEntity<Long> changeName(
-            @RequestBody ChangeRoleNameRequest request
-    ){
-        return ResponseEntity.ok(service.updateRoleName(request));
     }
 }

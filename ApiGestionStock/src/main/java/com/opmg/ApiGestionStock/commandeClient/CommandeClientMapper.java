@@ -11,9 +11,9 @@ public class CommandeClientMapper {
 
     public CommandeClient toCommandeClient(CommandeClientRequest request) {
         return CommandeClient.builder()
+                .id(request.id())
                 .code(request.code())
                 .dateCommande(request.dateCommande())
-                .etatCommande(request.etatCommande())
                 .build();
     }
 

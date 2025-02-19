@@ -5,13 +5,14 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record CategorieRequest(
-        @NotNull(message = "300")
-        @NotEmpty(message = "300")
-        @NotBlank(message = "300")
+        Long id,
+        @NotNull(message = "Le code de la catégorie est obligatoire")
+        @NotEmpty(message = "Le code de la catégorie est obligatoire")
+        @NotBlank(message = "Le code de la catégorie est obligatoire")
         String code,
-        @NotNull(message = "301")
-        @NotEmpty(message = "301")
-        @NotBlank(message = "301")
+        @NotNull(message = "La désignation de la catégorie est obligatoire")
+        @NotEmpty(message = "La désignation de la catégorie est obligatoire")
+        @NotBlank(message = "La désignation de la catégorie est obligatoire")
         String designation
 ) {
 }

@@ -13,9 +13,9 @@ public class CommandeFournisseurMapper {
 
     public CommandeFournisseur toCommandeFournisseur(CommandeFournisseurRequest request) {
         return CommandeFournisseur.builder()
+                .id(request.id())
                 .code(request.code())
                 .dateCommande(request.dateCommande())
-                .etatCommande(request.etatCommande())
                 .build();
     }
 

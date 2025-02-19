@@ -19,6 +19,10 @@ const routes: Routes = [
     component: NouvelArticleComponent
   },
   {
+    path: 'nouvel-article/:articleId',
+    component: NouvelArticleComponent
+  },
+  {
     path: 'mouvements-stock',
     component: MouvementsStockComponent
   }

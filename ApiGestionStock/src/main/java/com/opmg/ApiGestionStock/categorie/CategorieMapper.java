@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 public class CategorieMapper {
     public Categorie toCategorie(CategorieRequest request) {
         return Categorie.builder()
+                .id(request.id())
                 .code(request.code())
                 .designation(request.designation())
                 .build();

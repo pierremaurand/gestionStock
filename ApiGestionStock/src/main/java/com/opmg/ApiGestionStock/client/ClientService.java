@@ -1,5 +1,6 @@
 package com.opmg.ApiGestionStock.client;
 
+import com.opmg.ApiGestionStock.common.AdresseMapper;
 import com.opmg.ApiGestionStock.common.PageResponse;
 import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
@@ -23,15 +24,27 @@ import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.*;
 public class ClientService {
     private final ClientRepository repository;
     private final ClientMapper mapper;
+    private final AdresseMapper adresseMapper;
     private final FileStorageService fileStorageService;
 
     public Long save(ClientRequest request) {
         boolean exists = repository.existsByNumeroCNIOrNumeroTelOrEmail(request.numeroCNI(), request.numeroTel(), request.email());
-        if (exists) {
+        if (exists && request.id() == null) {
             log.error("Client already exist {}", request);
             throw new InvalidEntityException(CLIENT_ALREADY_EXISTS);
         }
-        return repository.save(mapper.toClient(request)).getId();
+
+        Client client = mapper.toClient(request);
+        if(request.id() != null) {
+            client = getClientById(request.id());
+            client.setNom(request.nom());
+            client.setNumeroCNI(request.numeroCNI());
+            client.setSexe(request.sexe());
+            client.setNumeroTel(request.numeroTel());
+            client.setEmail(request.email());
+            client.setAdresse(adresseMapper.toAdresse(request.adresse()));
+        }
+        return repository.save(client).getId();
     }
 
     public PageResponse<ClientResponse> findAll(int page, int size) {
@@ -47,6 +60,12 @@ public class ClientService {
                 clients.isFirst(),
                 clients.isLast()
         );
+    }
+
+    public List<ClientResponse> findAllClientsList() {
+        return repository.findAll().stream()
+                .map(mapper::toClientResponse)
+                .toList();
     }
 
     public ClientResponse findById(Long clientId) {

@@ -1,12 +1,10 @@
 package com.opmg.ApiGestionStock.fournisseur;
 
 import com.opmg.ApiGestionStock.commandeFournisseur.CommandeFournisseur;
+import com.opmg.ApiGestionStock.common.Adresse;
 import com.opmg.ApiGestionStock.common.BaseEntity;
 import com.opmg.ApiGestionStock.common.Sexe;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,6 +29,8 @@ public class Fournisseur extends BaseEntity {
     private String numeroTel;
     private String email;
     private String photo;
+    @Embedded
+    private Adresse adresse;
 
     @OneToMany(mappedBy = "fournisseur")
     private Collection<CommandeFournisseur> commandeFournisseurs;

@@ -24,7 +24,7 @@ public class RoleService {
     private final RoleMapper mapper;
 
     public Long save(RoleRequest request) {
-        isRoleExists(request.name());
+        isRoleExists(request);
         return repository.save(mapper.toRole(request)).getId();
     }
 
@@ -51,13 +51,6 @@ public class RoleService {
         return mapper.toRoleResponse(getRoleByName(name));
     }
 
-    public Long updateRoleName(ChangeRoleNameRequest request){
-        Role role = getRoleById(request.id());
-        isRoleExists(request.name());
-        role.setName(request.name());
-        return repository.save(role).getId();
-    }
-
     public void init() {
         if(repository.findAll().isEmpty()) {
             repository.saveAll(List.of(Role.builder().name("USER").build(), Role.builder().name("ADMIN").build()));
@@ -74,8 +67,8 @@ public class RoleService {
                 .orElseThrow(() -> new EntityNotFoundException(ROLE_NOT_FOUND));
     }
 
-    public void isRoleExists(String name){
-        if (repository.existsByName(name)) {
+    public void isRoleExists(RoleRequest request){
+        if (repository.existsByName(request.name()) && request.id() == null) {
             log.error("Role already exists in the data base");
             throw new InvalidEntityException(BusinessErrorCodes.ROLE_ALREADY_EXISTS);
         }

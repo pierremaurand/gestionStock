@@ -1,23 +1,18 @@
 package com.opmg.ApiGestionStock.ligneCommandeClient;
 
-import com.opmg.ApiGestionStock.article.Article;
-import com.opmg.ApiGestionStock.commandeClient.CommandeClient;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 public record LigneCommandeClientRequest(
-        @NotNull(message = "800")
-        @Min(value = 1, message = "801")
+        Long id,
+        @NotNull(message = "Aucun article n'a été selectionné")
+        @Min(value = 1, message = "L'article selectionné est invalid")
         Long article,
-        @NotNull(message = "802")
-        @Min(value = 1, message = "803")
+        @NotNull(message = "Aucune quantité n'a été renseigné")
+        @Min(value = 1, message = "La quantité commandée doit être supérieur ou égal à 1")
         Double quantite,
-        @NotNull(message = "804")
-        @Min(value = 1, message = "805")
-        Double prixUnitaire,
-        @NotNull(message = "806")
-        @Min(value = 1, message = "807")
-        Long commandeClient
+        @NotNull(message = "Le prix unitaire est obligatoire")
+        @Min(value = 1, message = "Le prix unitaire doit être supérieur ou égal à 1")
+        Double prixUnitaire
 ) {
 }

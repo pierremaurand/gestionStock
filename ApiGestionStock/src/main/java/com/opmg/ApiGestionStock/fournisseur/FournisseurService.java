@@ -1,5 +1,6 @@
 package com.opmg.ApiGestionStock.fournisseur;
 
+import com.opmg.ApiGestionStock.common.AdresseMapper;
 import com.opmg.ApiGestionStock.common.PageResponse;
 import com.opmg.ApiGestionStock.exception.EntityNotFoundException;
 import com.opmg.ApiGestionStock.exception.InvalidEntityException;
@@ -24,14 +25,27 @@ import static com.opmg.ApiGestionStock.handler.BusinessErrorCodes.*;
 public class FournisseurService {
     private final FournisseurRepository repository;
     private final FournisseurMapper mapper;
+    private final AdresseMapper adresseMapper;
     private final FileStorageService fileStorageService;
 
     public Long save(@Valid FournisseurRequest request) {
-        if (repository.existsByNumeroCNI(request.numeroCNI())) {
+        if (repository.existsByNumeroCNI(request.numeroCNI()) && request.id() == null) {
             log.error("Fournisseur already exist {}", request);
             throw new InvalidEntityException(FOURNISSEUR_ALREADY_EXISTS);
         }
-        return repository.save(mapper.toFournisseur(request)).getId();
+
+        Fournisseur fournisseur = mapper.toFournisseur(request);
+        if(request.id() != null) {
+            fournisseur = getFournisseurById(request.id());
+            fournisseur.setNom(request.nom());
+            fournisseur.setNumeroCNI(request.numeroCNI());
+            fournisseur.setSexe(request.sexe());
+            fournisseur.setNumeroTel(request.numeroTel());
+            fournisseur.setEmail(request.email());
+            fournisseur.setAdresse(adresseMapper.toAdresse(request.adresse()));
+        }
+
+        return repository.save(fournisseur).getId();
     }
 
     public PageResponse<FournisseurResponse> findAll(int page, int size) {
@@ -47,6 +61,12 @@ public class FournisseurService {
                 fournisseurs.isFirst(),
                 fournisseurs.isLast()
         );
+    }
+
+    public List<FournisseurResponse> findAllFournisseursList() {
+        return repository.findAll().stream()
+                .map(mapper::toFournisseurResponse)
+                .toList();
     }
 
     public FournisseurResponse findById(Long fournisseurId) {

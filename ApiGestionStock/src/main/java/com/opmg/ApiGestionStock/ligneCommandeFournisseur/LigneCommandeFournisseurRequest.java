@@ -4,17 +4,15 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 public record LigneCommandeFournisseurRequest(
-        @NotNull(message = "900")
-        @Min(value = 1, message = "901")
+        Long id,
+        @NotNull(message = "Aucun article n'a été selectionné")
+        @Min(value = 1, message = "L'article selectionné est invalid")
         Long article,
-        @NotNull(message = "902")
-        @Min(value = 1, message = "903")
+        @NotNull(message = "Aucune quantité n'a été renseigné")
+        @Min(value = 1, message = "La quantité commandée doit être supérieur ou égal à 1")
         Double quantite,
-        @NotNull(message = "904")
-        @Min(value = 1, message = "905")
-        Double prixUnitaire,
-        @NotNull(message = "906")
-        @Min(value = 1, message = "907")
-        Long commandeFournisseur
+        @NotNull(message = "Le prix unitaire est obligatoire")
+        @Min(value = 1, message = "Le prix unitaire doit être supérieur ou égal à 1")
+        Double prixUnitaire
 ) {
 }

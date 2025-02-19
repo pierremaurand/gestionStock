@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="row">
       <div class="image text-center border-2 border-end">
-        <img src="assets/images/product.png" alt="images-article" />
+        <img [src]="articlePhoto" alt="images-article" />
       </div>
       <div class="infos border-2 border-end">
         <div class="row">
@@ -15,19 +15,19 @@
           <div class="col-md-1">
             <i class="fa-solid fa-circle-info text-primary"></i>
           </div>
-          <div class="col-md-11">Désignation:</div>
+          <div class="col-md-11">{{article.designation}}</div>
         </div>
         <div class="row">
           <div class="col-md-1">
             <i class="fa-solid fa-dollar-sign text-primary"></i>
           </div>
-          <div class="col-md-11">11111111:</div>
+          <div class="col-md-11">{{article.prixUnitaireHt}}</div>
         </div>
         <div class="row">
           <div class="col-md-1">
             <i class="fa-solid fa-dollar-sign text-primary"></i>
           </div>
-          <div class="col-md-11">11111</div>
+          <div class="col-md-11">{{article.prixUnitaireTtc}}</div>
         </div>
       </div>
       <div class="categorie border-2 border-end">
@@ -37,10 +37,10 @@
           </div>
           <div class="col-md-10">
             <div class="row">
-              <div class="col">Code catégorie</div>
+              <div class="col">{{article.categorie?.code}}</div>
             </div>
             <div class="row">
-              <div class="col">Description</div>
+              <div class="col">{{article.categorie?.designation}}</div>
             </div>
           </div>
         </div>
@@ -48,17 +48,17 @@
       <div class="actions">
         <div class="row">
           <div class="col-md-4">
-            <button type="button" class="btn btn-link btn-sm text-warning">
+            <button (click)="onEdit()" type="button" class="btn btn-link btn-sm text-warning">
               <i class="fa-solid fa-pencil"></i>&nbsp;Modifier
             </button>
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-link btn-sm text-danger">
+            <button (click)="onDelete()" type="button" class="btn btn-link btn-sm text-danger">
               <i class="fa-solid fa-trash-can"></i>&nbsp;Supprimer
             </button>
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-link btn-sm text-primary">
+            <button (click)="onDetails()" type="button" class="btn btn-link btn-sm text-primary">
               <i class="fa-solid fa-table-list"></i>&nbsp;Détails
             </button>
           </div>

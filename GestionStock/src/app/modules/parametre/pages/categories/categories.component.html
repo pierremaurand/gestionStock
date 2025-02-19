@@ -1,114 +1,55 @@
-<div class="d-flex flex-column gap-1">
-  <div class="row page-header">
-    <div class="col-md-7 title">
-      <h1 class="h2">Liste des catégories</h1>
+<div class="card page">
+  <div class="card-body page-body">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="h3">Liste des catégories</h1>
+        </div>
+        <div class="col-md-5">
+          <app-bouttons-action
+            (clickEvent)="nouvelleCategorie()"
+          ></app-bouttons-action>
+        </div>
+      </div>
     </div>
-    <div class="col-md-5 actions text-end">
-      <app-bouttons-action (clickEvent)="nouvelleCategorie()"></app-bouttons-action>
+    <div class="row">
+      <div class="col-md-12">
+        <app-pagination
+          [page]="page"
+          [pages]="pages"
+          [totalPages]="categorieResponse.totalPages"
+          (goToPageEvent)="goToPage($event)"
+        ></app-pagination>
+      </div>
+    </div>
+    <div class="page-content">
+      <app-ligne-categorie
+        *ngFor="let categorie of categorieResponse.content"
+        [categorie]="categorie"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
+      ></app-ligne-categorie>
     </div>
   </div>
-  <div class="page-content">
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
+</div>
+
+<!-- modal -->
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4 border-2 border-end">Code catégorie</div>
-          <div class="col-md-8">Description</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="page-pagination">
-    <app-pagination></app-pagination>
   </div>
 </div>

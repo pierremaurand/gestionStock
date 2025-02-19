@@ -7,13 +7,13 @@ import org.springframework.http.HttpStatus;
 public enum BusinessErrorCodes {
     NO_CODE(0, HttpStatus.NOT_IMPLEMENTED, "No code"),
 
-    ARTICLE_NOT_FOUND(1000, HttpStatus.NOT_FOUND, "Article not found"),
-    ARTICLE_NOT_VALID(1001, HttpStatus.BAD_REQUEST, "Article not valid"),
+    ARTICLE_NOT_FOUND(1000, HttpStatus.NOT_FOUND, "Article introuvable"),
+    ARTICLE_OPERATION_NOT_PERMIT(1001, HttpStatus.FORBIDDEN, "La suppression de cet article n'est pas permit"),
     CODE_ARTICLE_ALREADY_EXISTS(102, HttpStatus.BAD_REQUEST, "Article code already exists"),
 
-    CATEGORIE_NOT_FOUND(2000, HttpStatus.NOT_FOUND, "Categorie not found"),
-    CATEGORIE_NOT_VALID(2001, HttpStatus.BAD_REQUEST, "Categorie not valid"),
-    CODE_CATEGORIE_ALREADY_EXISTS(2002, HttpStatus.BAD_REQUEST, "Categorie code already exists"),
+    CATEGORIE_NOT_FOUND(2000, HttpStatus.NOT_FOUND, "Catégorie introuvable"),
+    CATEGORIE_OPERATION_NOT_PERMIT(2001, HttpStatus.FORBIDDEN, "La suppression de cette catégorie n'est pas permit"),
+    CODE_CATEGORIE_ALREADY_EXISTS(2002, HttpStatus.BAD_REQUEST, "Ce code catégorie est déjà utilisé"),
 
     CLIENT_NOT_FOUND(3000, HttpStatus.NOT_FOUND, "Client not found"),
     CLIENT_NOT_VALID(3001, HttpStatus.BAD_REQUEST, "Client not valid"),

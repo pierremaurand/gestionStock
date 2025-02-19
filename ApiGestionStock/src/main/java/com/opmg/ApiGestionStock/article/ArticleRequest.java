@@ -3,23 +3,24 @@ package com.opmg.ApiGestionStock.article;
 import jakarta.validation.constraints.*;
 
 public record ArticleRequest(
-        @NotNull(message = "100")
-        @NotEmpty(message = "100")
-        @NotBlank(message = "100")
+        Long id,
+        @NotNull(message = "Le code de l'article est obligatoire")
+        @NotEmpty(message = "Le code de l'article est obligatoire")
+        @NotBlank(message = "Le code de l'article est obligatoire")
         String code,
-        @NotNull(message = "101")
-        @NotEmpty(message = "101")
-        @NotBlank(message = "101")
+        @NotNull(message = "La désignation de l'article est obligatoire")
+        @NotEmpty(message = "La désignation de l'article est obligatoire")
+        @NotBlank(message = "La désignation de l'article est obligatoire")
         String designation,
-        @NotNull(message = "102")
-        @Positive(message = "103")
+        @NotNull(message = "Le prix unitaire HT de l'article est obligatoire")
+        @Positive(message = "Le prix unitaire HT doit être un nombre positif")
         Double prixUnitaireHt,
-        @NotNull(message = "104")
-        @Min(value = 0, message = "105")
-        @Max(value = 100, message = "106")
+        @NotNull(message = "Le taux TVA de l'article est obligatoire")
+        @Positive(message = "Le taux TVA doit être un nombre positif")
+        @Max(value = 100, message = "Le taux TVA doit être inférieur ou égal à 100%")
         Double tauxTva,
-        @NotNull(message = "107")
-        @Min(value = 1, message = "108")
+        @NotNull(message = "Aucune catégorie n'a été selectionnée")
+        @Min(value = 1, message = "La catégorie selectionnée n'est pas valid")
         Long categorie
 ) {
 }
