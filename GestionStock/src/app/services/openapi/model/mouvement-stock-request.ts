@@ -13,7 +13,7 @@ export interface MouvementStockRequest {
     id?: number;
     dateMouvement: string;
     typeMouvement: MouvementStockRequest.TypeMouvementEnum;
-    provenance: MouvementStockRequest.ProvenanceEnum;
+    provenance?: MouvementStockRequest.ProvenanceEnum;
     quantite: number;
     article: number;
 }

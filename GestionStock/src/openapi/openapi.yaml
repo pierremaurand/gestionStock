@@ -3,31 +3,31 @@ info:
   title: Gestion de stock REST API
   version: "1.0"
 servers:
-- url: http://localhost:8080
-  description: Generated server url
+  - url: http://localhost:8080
+    description: Generated server url
 security:
-- JavaInUseSecurityScheme: []
+  - JavaInUseSecurityScheme: []
 paths:
   /ventes:
     get:
       tags:
-      - Vente
+        - Vente
       operationId: findAllVentes
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -37,7 +37,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseVenteResponse"
     post:
       tags:
-      - Vente
+        - Vente
       operationId: saveVente
       requestBody:
         content:
@@ -56,23 +56,23 @@ paths:
   /utilisateurs:
     get:
       tags:
-      - Utilisateur
+        - Utilisateur
       operationId: findAllUtilisateurs
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -82,7 +82,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseUtilisateurResponse"
     post:
       tags:
-      - Utilisateur
+        - Utilisateur
       operationId: saveUtilisateur
       requestBody:
         content:
@@ -101,15 +101,15 @@ paths:
   /utilisateurs/photo/upload/{id}:
     post:
       tags:
-      - Utilisateur
+        - Utilisateur
       operationId: uploadUtilisateurPhoto
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           multipart/form-data:
@@ -120,7 +120,7 @@ paths:
                   type: string
                   format: binary
               required:
-              - file
+                - file
       responses:
         "200":
           description: OK
@@ -131,23 +131,23 @@ paths:
   /roles:
     get:
       tags:
-      - Role
+        - Role
       operationId: findAllRoles
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -157,7 +157,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseRoleResponse"
     post:
       tags:
-      - Role
+        - Role
       operationId: saveRole
       requestBody:
         content:
@@ -176,7 +176,7 @@ paths:
   /mouvements-stock:
     get:
       tags:
-      - Mouvement Stock
+        - Mouvement Stock
       operationId: findAllMouvementStocks
       responses:
         "200":
@@ -189,7 +189,7 @@ paths:
                   $ref: "#/components/schemas/MouvementStockResponse"
     post:
       tags:
-      - Mouvement Stock
+        - Mouvement Stock
       operationId: saveMouvementStock
       requestBody:
         content:
@@ -208,23 +208,23 @@ paths:
   /fournisseurs:
     get:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: findAllFournisseurs
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -234,7 +234,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseFournisseurResponse"
     post:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: saveFournisseur
       requestBody:
         content:
@@ -253,15 +253,15 @@ paths:
   /fournisseurs/upload/photo/{id}:
     post:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: uploadFournisseurPhoto
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           multipart/form-data:
@@ -272,7 +272,7 @@ paths:
                   type: string
                   format: binary
               required:
-              - file
+                - file
       responses:
         "200":
           description: OK
@@ -283,23 +283,23 @@ paths:
   /commandes-fournisseur:
     get:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: findAllCommandeFournisseurs
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -309,7 +309,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseCommandeFournisseurResponse"
     post:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: saveCommandeFournisseur
       requestBody:
         content:
@@ -328,23 +328,23 @@ paths:
   /commandes-client:
     get:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: findAllCommandeClients
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -354,7 +354,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseCommandeClientResponse"
     post:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: saveCommandeClient
       requestBody:
         content:
@@ -373,23 +373,23 @@ paths:
   /clients:
     get:
       tags:
-      - Client
+        - Client
       operationId: findAllClients
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -399,7 +399,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseClientResponse"
     post:
       tags:
-      - Client
+        - Client
       operationId: saveClient
       requestBody:
         content:
@@ -418,15 +418,15 @@ paths:
   /clients/upload/photo/{id}:
     post:
       tags:
-      - Client
+        - Client
       operationId: uploadClientPhoto
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           multipart/form-data:
@@ -437,7 +437,7 @@ paths:
                   type: string
                   format: binary
               required:
-              - file
+                - file
       responses:
         "200":
           description: OK
@@ -448,23 +448,23 @@ paths:
   /categories:
     get:
       tags:
-      - Categorie
+        - Categorie
       operationId: findAllCategories
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -474,7 +474,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseCategorieResponse"
     post:
       tags:
-      - Categorie
+        - Categorie
       operationId: saveCategorie
       requestBody:
         content:
@@ -493,7 +493,7 @@ paths:
   /auth/login:
     post:
       tags:
-      - Authentication
+        - Authentication
       operationId: login
       requestBody:
         content:
@@ -511,23 +511,23 @@ paths:
   /articles:
     get:
       tags:
-      - Article
+        - Article
       operationId: findAllArticles
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -537,7 +537,7 @@ paths:
                 $ref: "#/components/schemas/PageResponseArticleResponse"
     post:
       tags:
-      - Article
+        - Article
       operationId: saveArticle
       requestBody:
         content:
@@ -556,15 +556,15 @@ paths:
   /articles/upload/photo/{id}:
     post:
       tags:
-      - Article
+        - Article
       operationId: uploadArticlePhoto
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           multipart/form-data:
@@ -575,7 +575,7 @@ paths:
                   type: string
                   format: binary
               required:
-              - file
+                - file
       responses:
         "200":
           description: OK
@@ -586,7 +586,7 @@ paths:
   /utilisateurs/mot-de-passe/update:
     patch:
       tags:
-      - Utilisateur
+        - Utilisateur
       operationId: changeUtilisateurPassword
       requestBody:
         content:
@@ -605,7 +605,7 @@ paths:
   /commandes-fournisseur/lignes-commande/quantite/update:
     patch:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: updateLigneCommandeFournisseurQuantite
       requestBody:
         content:
@@ -624,7 +624,7 @@ paths:
   /commandes-fournisseur/lignes-commande/article/update:
     patch:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: updateLigneCommandeFournisseurArticle
       requestBody:
         content:
@@ -643,7 +643,7 @@ paths:
   /commandes-fournisseur/fournisseur/update:
     patch:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: updateCommandeFournisseurFournisseur
       requestBody:
         content:
@@ -662,7 +662,7 @@ paths:
   /commandes-fournisseur/etat/update:
     patch:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: updateCommandeFournisseurEtat
       requestBody:
         content:
@@ -681,7 +681,7 @@ paths:
   /commandes-fournisseur/date-commande/update:
     patch:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: updateCommandeFournisseurDateCommande
       requestBody:
         content:
@@ -700,7 +700,7 @@ paths:
   /commandes-client/lignes-commande/quantite/update:
     patch:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: updateLigneCommandeClientQuantite
       requestBody:
         content:
@@ -719,7 +719,7 @@ paths:
   /commandes-client/lignes-commande/article/update:
     patch:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: updateLigneCommandeClientArticle
       requestBody:
         content:
@@ -738,7 +738,7 @@ paths:
   /commandes-client/etat/update:
     patch:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: updateCommandeClientEtat
       requestBody:
         content:
@@ -757,7 +757,7 @@ paths:
   /commandes-client/date-commande/update:
     patch:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: updateCommandeClientDateCommande
       requestBody:
         content:
@@ -776,7 +776,7 @@ paths:
   /commandes-client/client/update:
     patch:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: updateCommandeClientClient
       requestBody:
         content:
@@ -795,23 +795,23 @@ paths:
   /ventes/lignes-vente:
     get:
       tags:
-      - Vente
+        - Vente
       operationId: findAllLigneVentes
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -822,29 +822,29 @@ paths:
   /ventes/lignes-vente/vente/{id}:
     get:
       tags:
-      - Vente
+        - Vente
       operationId: findAllLigneVentesByVente
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -855,29 +855,29 @@ paths:
   /ventes/lignes-vente/article/{id}:
     get:
       tags:
-      - Vente
+        - Vente
       operationId: findAllLigneVentesByArticle
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -888,14 +888,14 @@ paths:
   /utilisateurs/login/{login}:
     get:
       tags:
-      - Utilisateur
+        - Utilisateur
       operationId: findUtilisateurByLogin
       parameters:
-      - name: login
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: login
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -906,15 +906,15 @@ paths:
   /utilisateurs/id/{id}:
     get:
       tags:
-      - Utilisateur
+        - Utilisateur
       operationId: findUtilisateurById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -925,14 +925,14 @@ paths:
   /roles/filtre/name/{role-name}:
     get:
       tags:
-      - Role
+        - Role
       operationId: findRoleByName
       parameters:
-      - name: role-name
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: role-name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -943,15 +943,15 @@ paths:
   /roles/filtre/id/{role-id}:
     get:
       tags:
-      - Role
+        - Role
       operationId: findRoleById
       parameters:
-      - name: role-id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: role-id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -962,15 +962,15 @@ paths:
   /mouvements-stock/id/{id}:
     get:
       tags:
-      - Mouvement Stock
+        - Mouvement Stock
       operationId: findMouvementStockById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -981,14 +981,14 @@ paths:
   /fournisseurs/numero-tel/{numero-tel}:
     get:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: findFournisseurByNumeroTel
       parameters:
-      - name: numero-tel
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: numero-tel
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -999,14 +999,14 @@ paths:
   /fournisseurs/numero-cni/{numero-cni}:
     get:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: findFournisseurByNumeroCNI
       parameters:
-      - name: numero-cni
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: numero-cni
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1017,7 +1017,7 @@ paths:
   /fournisseurs/list:
     get:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: findAllFournisseursList
       responses:
         "200":
@@ -1031,15 +1031,15 @@ paths:
   /fournisseurs/id/{id}:
     get:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: findFournisseurById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1050,14 +1050,14 @@ paths:
   /fournisseurs/email/{email}:
     get:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: findFournisseurByEmail
       parameters:
-      - name: email
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1068,29 +1068,29 @@ paths:
   /commandes-fournisseur/lignes-commande/commande-fournisseur/{id}:
     get:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: findAllLigneCommandeFournisseursByCommandeFournisseur
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1101,29 +1101,29 @@ paths:
   /commandes-fournisseur/lignes-commande/article/{id}:
     get:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: findAllLigneCommandeFournisseursByArticle
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1134,15 +1134,15 @@ paths:
   /commandes-fournisseur/id/{id}:
     get:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: findCommandeFournisseurById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1153,14 +1153,14 @@ paths:
   /commandes-fournisseur/code/{code}:
     get:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: findCommandeFournisseurByCode
       parameters:
-      - name: code
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1171,23 +1171,23 @@ paths:
   /commandes-client/lignes-commande:
     get:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: findLigneCommandeClients
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
       responses:
         "200":
           description: OK
@@ -1198,29 +1198,29 @@ paths:
   /commandes-client/lignes-commande/commande-client/{id}:
     get:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: findAllLigneCommandeClientsByCommandeClient
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1231,29 +1231,29 @@ paths:
   /commandes-client/lignes-commande/article/{id}:
     get:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: findAllLigneCommandeClientsByArticle
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1264,15 +1264,15 @@ paths:
   /commandes-client/id/{id}:
     get:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: findCommandeClientById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1283,14 +1283,14 @@ paths:
   /commandes-client/code/{code}:
     get:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: findCommandeClientByCode
       parameters:
-      - name: code
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1301,14 +1301,14 @@ paths:
   /clients/numero-tel/{client-numero-tel}:
     get:
       tags:
-      - Client
+        - Client
       operationId: findClientByNumeroTel
       parameters:
-      - name: client-numero-tel
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: client-numero-tel
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1319,14 +1319,14 @@ paths:
   /clients/numero-cni/{client-numero-cni}:
     get:
       tags:
-      - Client
+        - Client
       operationId: findClientByNumeroCNI
       parameters:
-      - name: client-numero-cni
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: client-numero-cni
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1337,7 +1337,7 @@ paths:
   /clients/list:
     get:
       tags:
-      - Client
+        - Client
       operationId: findAllClientsList
       responses:
         "200":
@@ -1351,15 +1351,15 @@ paths:
   /clients/id/{client-id}:
     get:
       tags:
-      - Client
+        - Client
       operationId: findClientById
       parameters:
-      - name: client-id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: client-id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1370,14 +1370,14 @@ paths:
   /clients/email/{client-email}:
     get:
       tags:
-      - Client
+        - Client
       operationId: findClientByEmail
       parameters:
-      - name: client-email
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: client-email
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1388,7 +1388,7 @@ paths:
   /categories/list:
     get:
       tags:
-      - Categorie
+        - Categorie
       operationId: findCategoriesList
       responses:
         "200":
@@ -1402,15 +1402,15 @@ paths:
   /categories/id/{id}:
     get:
       tags:
-      - Categorie
+        - Categorie
       operationId: findCategorieById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1421,14 +1421,14 @@ paths:
   /categories/code/{code}:
     get:
       tags:
-      - Categorie
+        - Categorie
       operationId: findCategorieById_1
       parameters:
-      - name: code
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1439,7 +1439,7 @@ paths:
   /articles/list:
     get:
       tags:
-      - Article
+        - Article
       operationId: findAllArticlesList
       responses:
         "200":
@@ -1453,15 +1453,15 @@ paths:
   /articles/filtre/id/{id}:
     get:
       tags:
-      - Article
+        - Article
       operationId: findArticleById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1472,14 +1472,14 @@ paths:
   /articles/filtre/code/{code}:
     get:
       tags:
-      - Article
+        - Article
       operationId: findArticleByCode
       parameters:
-      - name: code
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -1490,29 +1490,29 @@ paths:
   /articles/filtre/categorie/{id}:
     get:
       tags:
-      - Article
+        - Article
       operationId: findAllArticlesByCategorieId
       parameters:
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 0
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1523,15 +1523,15 @@ paths:
   /fournisseurs/delete/{id}:
     delete:
       tags:
-      - Fournisseur
+        - Fournisseur
       operationId: deleteFournisseur
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1542,7 +1542,7 @@ paths:
   /commandes-fournisseur/lignes-commande/delete:
     delete:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: deleteLigneCommandeFournisseur
       requestBody:
         content:
@@ -1561,15 +1561,15 @@ paths:
   /commandes-fournisseur/delete/{id}:
     delete:
       tags:
-      - Commande Fournisseur
+        - Commande Fournisseur
       operationId: deleteCommandeFournisseur
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1580,7 +1580,7 @@ paths:
   /commandes-client/lignes-commande/delete:
     delete:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: deleteLigneCommandeClient
       requestBody:
         content:
@@ -1599,15 +1599,15 @@ paths:
   /commandes-client/delete/{id}:
     delete:
       tags:
-      - Commande Client
+        - Commande Client
       operationId: deleteCommandeClient
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1618,15 +1618,15 @@ paths:
   /clients/delete/{id}:
     delete:
       tags:
-      - Client
+        - Client
       operationId: deleteClient
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1637,15 +1637,15 @@ paths:
   /categories/delete/{id}:
     delete:
       tags:
-      - Categorie
+        - Categorie
       operationId: deleteCategorie
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1656,15 +1656,15 @@ paths:
   /articles/delete/{id}:
     delete:
       tags:
-      - Article
+        - Article
       operationId: deleteArticle
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
@@ -1693,9 +1693,9 @@ components:
           format: double
           minimum: 1
       required:
-      - article
-      - prixUnitaire
-      - quantite
+        - article
+        - prixUnitaire
+        - quantite
     VenteRequest:
       type: object
       properties:
@@ -1712,9 +1712,9 @@ components:
           items:
             $ref: "#/components/schemas/LigneVenteRequest"
       required:
-      - code
-      - dateVente
-      - ligneVentes
+        - code
+        - dateVente
+        - ligneVentes
     AdresseRequest:
       type: object
       properties:
@@ -1729,9 +1729,9 @@ components:
         pays:
           type: string
       required:
-      - adresse1
-      - pays
-      - ville
+        - adresse1
+        - pays
+        - ville
     UtilisateurRequest:
       type: object
       properties:
@@ -1743,8 +1743,8 @@ components:
         sexe:
           type: string
           enum:
-          - MASCULIN
-          - FEMININ
+            - MASCULIN
+            - FEMININ
         login:
           type: string
         numeroTel:
@@ -1754,11 +1754,11 @@ components:
         adresse:
           $ref: "#/components/schemas/AdresseRequest"
       required:
-      - adresse
-      - login
-      - nom
-      - numeroTel
-      - sexe
+        - adresse
+        - login
+        - nom
+        - numeroTel
+        - sexe
     RoleRequest:
       type: object
       properties:
@@ -1768,7 +1768,7 @@ components:
         name:
           type: string
       required:
-      - name
+        - name
     MouvementStockRequest:
       type: object
       properties:
@@ -1781,17 +1781,17 @@ components:
         typeMouvement:
           type: string
           enum:
-          - ENTREE
-          - SORTIE
-          - CORRECTION_POS
-          - CORRECTION_NEG
+            - ENTREE
+            - SORTIE
+            - CORRECTION_POS
+            - CORRECTION_NEG
         provenance:
           type: string
           enum:
-          - COMMANDE_CLIENT
-          - COMMANDE_FOURNISSEUR
-          - CORRECTION
-          - VENTE
+            - COMMANDE_CLIENT
+            - COMMANDE_FOURNISSEUR
+            - CORRECTION
+            - VENTE
         quantite:
           type: number
           format: double
@@ -1801,11 +1801,10 @@ components:
           format: int64
           minimum: 1
       required:
-      - article
-      - dateMouvement
-      - provenance
-      - quantite
-      - typeMouvement
+        - article
+        - dateMouvement
+        - quantite
+        - typeMouvement
     FournisseurRequest:
       type: object
       properties:
@@ -1819,8 +1818,8 @@ components:
         sexe:
           type: string
           enum:
-          - MASCULIN
-          - FEMININ
+            - MASCULIN
+            - FEMININ
         numeroTel:
           type: string
         email:
@@ -1828,9 +1827,9 @@ components:
         adresse:
           $ref: "#/components/schemas/AdresseRequest"
       required:
-      - adresse
-      - nom
-      - numeroTel
+        - adresse
+        - nom
+        - numeroTel
     CommandeFournisseurRequest:
       type: object
       properties:
@@ -1851,10 +1850,10 @@ components:
           items:
             $ref: "#/components/schemas/LigneCommandeFournisseurRequest"
       required:
-      - code
-      - dateCommande
-      - fournisseur
-      - ligneCommandeFournisseurs
+        - code
+        - dateCommande
+        - fournisseur
+        - ligneCommandeFournisseurs
     LigneCommandeFournisseurRequest:
       type: object
       properties:
@@ -1874,9 +1873,9 @@ components:
           format: double
           minimum: 1
       required:
-      - article
-      - prixUnitaire
-      - quantite
+        - article
+        - prixUnitaire
+        - quantite
     CommandeClientRequest:
       type: object
       properties:
@@ -1897,10 +1896,10 @@ components:
           items:
             $ref: "#/components/schemas/LigneCommandeClientRequest"
       required:
-      - client
-      - code
-      - dateCommande
-      - ligneCommandeClients
+        - client
+        - code
+        - dateCommande
+        - ligneCommandeClients
     LigneCommandeClientRequest:
       type: object
       properties:
@@ -1920,9 +1919,9 @@ components:
           format: double
           minimum: 1
       required:
-      - article
-      - prixUnitaire
-      - quantite
+        - article
+        - prixUnitaire
+        - quantite
     ClientRequest:
       type: object
       properties:
@@ -1936,8 +1935,8 @@ components:
         sexe:
           type: string
           enum:
-          - MASCULIN
-          - FEMININ
+            - MASCULIN
+            - FEMININ
         numeroTel:
           type: string
         email:
@@ -1945,11 +1944,11 @@ components:
         adresse:
           $ref: "#/components/schemas/AdresseRequest"
       required:
-      - adresse
-      - nom
-      - numeroCNI
-      - numeroTel
-      - sexe
+        - adresse
+        - nom
+        - numeroCNI
+        - numeroTel
+        - sexe
     CategorieRequest:
       type: object
       properties:
@@ -1961,8 +1960,8 @@ components:
         designation:
           type: string
       required:
-      - code
-      - designation
+        - code
+        - designation
     AuthenticationRequest:
       type: object
       properties:
@@ -1971,8 +1970,8 @@ components:
         motDePasse:
           type: string
       required:
-      - login
-      - motDePasse
+        - login
+        - motDePasse
     AdresseResponse:
       type: object
       properties:
@@ -2006,8 +2005,8 @@ components:
         sexe:
           type: string
           enum:
-          - MASCULIN
-          - FEMININ
+            - MASCULIN
+            - FEMININ
         numeroTel:
           type: string
         email:
@@ -2039,11 +2038,11 @@ components:
           format: int64
           minimum: 1
       required:
-      - categorie
-      - code
-      - designation
-      - prixUnitaireHt
-      - tauxTva
+        - categorie
+        - code
+        - designation
+        - prixUnitaireHt
+        - tauxTva
     ChangePasswordRequest:
       type: object
       properties:
@@ -2056,9 +2055,9 @@ components:
         confirmMotDePasse:
           type: string
       required:
-      - confirmMotDePasse
-      - motDePasse
-      - utilisateur
+        - confirmMotDePasse
+        - motDePasse
+        - utilisateur
     ChangeQuantiteCommandeRequest:
       type: object
       properties:
@@ -2075,9 +2074,9 @@ components:
           format: double
           minimum: 1
       required:
-      - commandeId
-      - ligneCommandeId
-      - quantite
+        - commandeId
+        - ligneCommandeId
+        - quantite
     ChangeArticleCommandeRequest:
       type: object
       properties:
@@ -2094,9 +2093,9 @@ components:
           format: int64
           minimum: 1
       required:
-      - articleId
-      - commandeId
-      - ligneCommandeId
+        - articleId
+        - commandeId
+        - ligneCommandeId
     ChangeFournisseurRequest:
       type: object
       properties:
@@ -2109,8 +2108,8 @@ components:
           format: int64
           minimum: 1
       required:
-      - commandeFournisseur
-      - fournisseur
+        - commandeFournisseur
+        - fournisseur
     ChangeEtatCommandeRequest:
       type: object
       properties:
@@ -2121,12 +2120,12 @@ components:
         etatCommande:
           type: string
           enum:
-          - EN_PREPARATION
-          - VALIDEE
-          - LIVREE
+            - EN_PREPARATION
+            - VALIDEE
+            - LIVREE
       required:
-      - commandeId
-      - etatCommande
+        - commandeId
+        - etatCommande
     ChangeDateCommandeRequest:
       type: object
       properties:
@@ -2138,8 +2137,8 @@ components:
           type: string
           format: date
       required:
-      - commande
-      - dateCommande
+        - commande
+        - dateCommande
     ChangeClientRequest:
       type: object
       properties:
@@ -2152,8 +2151,8 @@ components:
           format: int64
           minimum: 1
       required:
-      - client
-      - commandeClient
+        - client
+        - commandeClient
     PageResponseVenteResponse:
       type: object
       properties:
@@ -2333,17 +2332,17 @@ components:
         typeMouvement:
           type: string
           enum:
-          - ENTREE
-          - SORTIE
-          - CORRECTION_POS
-          - CORRECTION_NEG
+            - ENTREE
+            - SORTIE
+            - CORRECTION_POS
+            - CORRECTION_NEG
         provenance:
           type: string
           enum:
-          - COMMANDE_CLIENT
-          - COMMANDE_FOURNISSEUR
-          - CORRECTION
-          - VENTE
+            - COMMANDE_CLIENT
+            - COMMANDE_FOURNISSEUR
+            - CORRECTION
+            - VENTE
         article:
           type: integer
           format: int64
@@ -2360,8 +2359,8 @@ components:
         sexe:
           type: string
           enum:
-          - MASCULIN
-          - FEMININ
+            - MASCULIN
+            - FEMININ
         numeroTel:
           type: string
         email:
@@ -2413,9 +2412,9 @@ components:
         etatCommande:
           type: string
           enum:
-          - EN_PREPARATION
-          - VALIDEE
-          - LIVREE
+            - EN_PREPARATION
+            - VALIDEE
+            - LIVREE
         fournisseur:
           $ref: "#/components/schemas/FournisseurResponse"
     PageResponseCommandeFournisseurResponse:
@@ -2493,8 +2492,8 @@ components:
         sexe:
           type: string
           enum:
-          - MASCULIN
-          - FEMININ
+            - MASCULIN
+            - FEMININ
         numeroTel:
           type: string
         email:
@@ -2518,9 +2517,9 @@ components:
         etatCommande:
           type: string
           enum:
-          - EN_PREPARATION
-          - VALIDEE
-          - LIVREE
+            - EN_PREPARATION
+            - VALIDEE
+            - LIVREE
         client:
           $ref: "#/components/schemas/ClientResponse"
     PageResponseCommandeClientResponse:
@@ -2666,8 +2665,8 @@ components:
           format: int64
           minimum: 1
       required:
-      - commande
-      - ligneCommande
+        - commande
+        - ligneCommande
   securitySchemes:
     JavaInUseSecurityScheme:
       type: http
