@@ -8,6 +8,7 @@
  * Do not edit the class manually.
  */
 import { ClientResponse } from './client-response';
+import { LigneCommandeClientResponse } from './ligne-commande-client-response';
 
 
 export interface CommandeClientResponse { 
@@ -16,6 +17,7 @@ export interface CommandeClientResponse {
     dateCommande?: string;
     etatCommande?: CommandeClientResponse.EtatCommandeEnum;
     client?: ClientResponse;
+    ligneCommandeClients?: Array<LigneCommandeClientResponse>;
 }
 export namespace CommandeClientResponse {
     export type EtatCommandeEnum = 'EN_PREPARATION' | 'VALIDEE' | 'LIVREE';

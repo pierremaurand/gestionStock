@@ -1,39 +1,27 @@
-<div class="card">
-  <div class="card-body">
-    <div class="page-header">
-      <div class="row">
-        <div class="col-md-7">
-          <h1 class="h3">Liste des fournisseurs</h1>
-        </div>
-        <div class="col-md-5">
-          <app-bouttons-action
-            (clickEvent)="nouveauFournisseur()"
-          ></app-bouttons-action>
-        </div>
-      </div>
-    </div>
-    <div class="row mb-1">
-      <div class="col-md-12">
-        <app-pagination
-          [page]="page"
-          [pages]="pages"
-          [totalPages]="fournisseurResponse.totalPages"
-          (goToPageEvent)="goToPage($event)"
-        ></app-pagination>
-      </div>
-    </div>
-    <div class="row">
-      <div
-        class="col-md-12 mb-1"
-        *ngFor="let fournisseur of fournisseurResponse.content"
-      >
-        <app-ligne-fournisseur
-          [fournisseur]="fournisseur"
-          (delete)="onDelete($event)"
-          (details)="onDetails($event)"
-          (edit)="onEdit($event)"
-        ></app-ligne-fournisseur>
-      </div>
-    </div>
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h1 class="h2">Les fournisseurs</h1>
+  <div class="d-flex justity-content-center align-items-center">
+    <app-bouttons-action (clickEvent)="nouveauFournisseur()"></app-bouttons-action>
   </div>
+</div>
+
+<div class="page-content">
+  <app-ligne-fournisseur
+    *ngFor="let fournisseur of fournisseurResponse.content"
+    [fournisseur]="fournisseur"
+    (delete)="onDelete($event)"
+    (details)="onDetails($event)"
+    (edit)="onEdit($event)"
+  ></app-ligne-fournisseur>
+</div>
+
+<div *ngIf="fournisseurResponse.totalPages && fournisseurResponse.totalPages > 1" class="mt-3 d-flex justify-content-center align-items-center">
+  <app-pagination
+    [page]="page"
+    [pages]="pages"
+    [totalPages]="fournisseurResponse.totalPages"
+    (goToPageEvent)="goToPage($event)"
+  ></app-pagination>
 </div>

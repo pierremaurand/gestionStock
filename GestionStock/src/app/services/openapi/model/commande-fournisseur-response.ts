@@ -7,6 +7,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { LigneCommandeFournisseurResponse } from './ligne-commande-fournisseur-response';
 import { FournisseurResponse } from './fournisseur-response';
 
 
@@ -16,6 +17,7 @@ export interface CommandeFournisseurResponse {
     dateCommande?: string;
     etatCommande?: CommandeFournisseurResponse.EtatCommandeEnum;
     fournisseur?: FournisseurResponse;
+    ligneCommandeFournisseurs?: Array<LigneCommandeFournisseurResponse>;
 }
 export namespace CommandeFournisseurResponse {
     export type EtatCommandeEnum = 'EN_PREPARATION' | 'VALIDEE' | 'LIVREE';

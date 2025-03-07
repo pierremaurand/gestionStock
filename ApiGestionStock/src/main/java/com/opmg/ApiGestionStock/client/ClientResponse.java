@@ -23,5 +23,6 @@ public class ClientResponse {
     private String numeroTel;
     private String email;
     private byte[] photo;
+    private String value;
     private AdresseResponse adresse;
 }

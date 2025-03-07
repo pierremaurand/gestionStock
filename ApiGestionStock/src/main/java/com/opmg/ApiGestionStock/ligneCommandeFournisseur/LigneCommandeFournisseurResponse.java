@@ -18,5 +18,4 @@ public class LigneCommandeFournisseurResponse {
     private ArticleResponse article;
     private Double quantite;
     private Double prixUnitaire;
-    private CommandeFournisseurResponse commandeFournisseur;
 }

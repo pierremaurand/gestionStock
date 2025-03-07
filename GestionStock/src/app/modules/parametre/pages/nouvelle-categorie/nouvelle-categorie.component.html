@@ -1,45 +1,41 @@
-<div class="card page-content">
-  <div class="card-body">
-    <h1 class="h3 mb-3">
-      <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
-      Informations de la catégorie
-    </h1>
-    <hr>
-    <div class="row mb-3">
-      <div class="col-md-12 mb-3">
-        <input
-          type="text"
-          class="form-control"
-          title="code"
-          name="code"
-          id="code"
-          placeholder="Code de la catégorie"
-          [(ngModel)]="categorieRequest.code"
-          disabled
-        />
-      </div>
-      <div class="col-md-12">
-        <input
-          type="text"
-          class="form-control"
-          title="description"
-          name="description"
-          id="description"
-          placeholder="Description"
-          [(ngModel)]="categorieRequest.designation"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 text-end">
-        <button class="btn btn-danger me-2" type="button" (click)="onCancel()">
-          <i class="fa-solid fa-ban"></i>&nbsp; Annuler
-        </button>
-        <button class="btn btn-primary" type="button" (click)="save()">
-          <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
-        </button>
-      </div>
-    </div>
+<h1 class="h2 mb-3">
+  <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
+  Informations de la catégorie
+</h1>
+<hr>
+<div class="row mb-3">
+  <div class="col-md-12 mb-3">
+    <input
+      type="text"
+      class="form-control"
+      title="code"
+      name="code"
+      id="code"
+      placeholder="Code de la catégorie"
+      [(ngModel)]="categorieRequest.code"
+      disabled
+    />
+  </div>
+  <div class="col-md-12">
+    <input
+      type="text"
+      class="form-control"
+      title="description"
+      name="description"
+      id="description"
+      placeholder="Description"
+      [(ngModel)]="categorieRequest.designation"
+    />
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 text-end">
+    <button class="btn btn-danger me-2" type="button" (click)="onCancel()">
+      <i class="fa-solid fa-ban"></i>&nbsp; Annuler
+    </button>
+    <button class="btn btn-primary" type="button" (click)="save()">
+      <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
+    </button>
   </div>
 </div>
 

@@ -13,6 +13,7 @@ export interface CategorieResponse {
     id?: number;
     code?: string;
     designation?: string;
+    value?: string;
     totalArticles?: number;
 }
 

@@ -30,6 +30,7 @@ public class ArticleMapper {
                 .prixUnitaireTtc(article.getPrixUnitaireTtc())
                 .categorie(categorieMapper.toCategorieResponse(article.getCategorie()))
                 .photo(FileUtils.readFileFromLocation(article.getPhoto()))
+                .value(article.getCode()+" "+article.getDesignation())
                 .build();
     }
 }

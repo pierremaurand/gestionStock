@@ -1,78 +1,41 @@
-<div class="card mb-1">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-3 border-2 border-end d-flex align-items-center">
-        {{ categorie.code }}
-      </div>
-      <div class="col-md-6 border-2 border-end d-flex align-items-center">
-        {{ categorie.designation }}
-      </div>
-      <div class="col-md-3 d-flex justify-content-center align-items-center">
-        <div class="row">
-          <div class="col-md-4">
-            <button
-              (click)="onEdit()"
-              type="button"
-              class="btn btn-warning btn-sm"
-            >
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-          </div>
-          <div class="col-md-4">
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#suppressionCategorie"
-            >
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </div>
-          <div class="col-md-4">
-            <button
-            (click)="onDetails()"
-            type="button"
-            class="btn btn-primary btn-sm"
-          >
-            <i class="fa-solid fa-table-list"></i>
-          </button>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="card shadow">
+  <div class="card-body overflow-auto">
+    <h5 class="card-title fs-6 text-nowrap fw-bold mb-1">
+      {{ categorie.code }}
+    </h5>
+    <h6 class="card-subtitle fs-6 text-secondary mb-1">
+      {{ categorie.designation }}
+    </h6>
   </div>
-</div>
-
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="suppressionCategorie"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Catégorie</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        Etes vous sur de vouloir supprimer cette catégorie?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          <i class="fa-solid fa-ban"></i>&nbsp;Annuler
-        </button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDelete()">
-          <i class="fa-solid fa-trash-can"></i>&nbsp;Supprimer
-        </button>
-      </div>
+  <div
+    class="card-footer d-flex gap-2 justify-content-between align-items-center"
+  >
+    <div class="d-flex gap-2">
+      <span class="fw-bold">
+        <i class="fa-solid fa-boxes-stacked"></i>&nbsp;
+        {{ categorie.totalArticles }}
+      </span>
+    </div>
+    <div class="d-flex gap-2">
+      <button (click)="onEdit()" type="button" class="btn btn-warning btn-sm">
+        <i class="fa-solid fa-pencil"></i>
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#suppressionCategorie"
+        (click)="onDelete()"
+      >
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+      <button
+        (click)="onDetails()"
+        type="button"
+        class="btn btn-primary btn-sm"
+      >
+        <i class="fa-solid fa-table-list"></i>
+      </button>
     </div>
   </div>
 </div>

@@ -19,6 +19,7 @@ export interface FournisseurResponse {
     email?: string;
     photo?: string;
     commandeFournisseurs?: Array<number>;
+    value?: string;
     adresse?: AdresseResponse;
 }
 export namespace FournisseurResponse {

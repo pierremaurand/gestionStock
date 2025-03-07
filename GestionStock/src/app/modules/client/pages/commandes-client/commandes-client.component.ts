@@ -1,7 +1,6 @@
 import { ToastService } from './../../../../services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { BouttonsActionComponent } from '../../../../composants/bouttons-action/bouttons-action.component';
-import { DetailsCommandeClientFournisseurComponent } from '../../../../composants/details-commande-client-fournisseur/details-commande-client-fournisseur.component';
 import { PaginationComponent } from '../../../../composants/pagination/pagination.component';
 import { Router } from '@angular/router';
 import {
@@ -11,12 +10,15 @@ import {
   CommandeClientService,
   PageResponseCommandeClientResponse,
 } from '../../../../services/openapi';
+import { CommonModule } from '@angular/common';
+import { LigneCommandeClientComponent } from '../../composants/ligne-commande-client/ligne-commande-client.component';
 
 @Component({
   selector: 'app-commandes-client',
   imports: [
+    CommonModule,
     BouttonsActionComponent,
-    DetailsCommandeClientFournisseurComponent,
+    LigneCommandeClientComponent,
     PaginationComponent,
   ],
   templateUrl: './commandes-client.component.html',

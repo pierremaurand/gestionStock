@@ -8,7 +8,6 @@
  * Do not edit the class manually.
  */
 import { ArticleResponse } from './article-response';
-import { CommandeClientResponse } from './commande-client-response';
 
 
 export interface LigneCommandeClientResponse { 
@@ -16,6 +15,5 @@ export interface LigneCommandeClientResponse {
     article?: ArticleResponse;
     quantite?: number;
     prixUnitaire?: number;
-    commandeClient?: CommandeClientResponse;
 }
 

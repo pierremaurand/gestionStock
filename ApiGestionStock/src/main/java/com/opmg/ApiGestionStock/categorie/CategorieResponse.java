@@ -15,5 +15,6 @@ public class CategorieResponse {
     private Long id;
     private String code;
     private String designation;
+    private String value;
     private Long totalArticles;
 }

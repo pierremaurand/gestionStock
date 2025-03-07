@@ -18,6 +18,7 @@ export interface ClientResponse {
     numeroTel?: string;
     email?: string;
     photo?: string;
+    value?: string;
     adresse?: AdresseResponse;
 }
 export namespace ClientResponse {

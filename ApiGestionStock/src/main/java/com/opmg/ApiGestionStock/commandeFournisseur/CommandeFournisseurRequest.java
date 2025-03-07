@@ -1,5 +1,6 @@
 package com.opmg.ApiGestionStock.commandeFournisseur;
 
+import com.opmg.ApiGestionStock.common.EtatCommande;
 import com.opmg.ApiGestionStock.ligneCommandeFournisseur.LigneCommandeFournisseurRequest;
 import jakarta.validation.constraints.*;
 
@@ -15,6 +16,8 @@ public record CommandeFournisseurRequest(
         @NotNull(message = "La date de la commande est obligatoire")
         @PastOrPresent(message = "La date de la commande doit être passée ou actuelle")
         LocalDate dateCommande,
+        @NotNull(message = "L'état de la commande doit être renseigné")
+        EtatCommande etatCommande,
         @NotNull(message = "Aucun fournisseur n'a été selectionné")
         @Min(value = 1, message = "Le fournisseur selectionné est invalid")
         Long fournisseur,

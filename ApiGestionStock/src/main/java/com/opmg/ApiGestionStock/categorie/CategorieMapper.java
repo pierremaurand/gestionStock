@@ -18,6 +18,7 @@ public class CategorieMapper {
                 .code(categorie.getCode())
                 .designation(categorie.getDesignation())
                 .totalArticles(categorie.getTotalArticles())
+                .value(categorie.getCode()+" "+categorie.getDesignation())
                 .build();
     }
 }

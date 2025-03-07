@@ -21,5 +21,4 @@ public class LigneCommandeClientResponse {
     private ArticleResponse article;
     private Double quantite;
     private Double prixUnitaire;
-    private CommandeClientResponse commandeClient;
 }

@@ -1,117 +1,40 @@
-<div class="card">
+<div class="card shadow">
+  <img height="200" [src]="articlePhoto" class="card-img-top" alt="...">
   <div class="card-body">
-    <div class="row">
-      <div class="col-md-2 text-center border-2 border-end">
-        <img [src]="articlePhoto" class="w-100" alt="images-article" />
-      </div>
-      <div class="col-md-7 d-flex justify-content-center align-items-center">
-        <div class="row h-100">
-          <div class="col-md-6 border-2 border-end d-flex justify-content-center align-items-center">
-            <div class="row d-flex justify-content-center align-items-center">
-              <div class="col-md-12">
-                <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
-                {{ article.code }}
-              </div>
-              <div class="col-md-12">
-                <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
-                {{ article.designation }}
-              </div>
-              <div class="col-md-12">
-                <i class="fa-solid fa-dollar-sign text-primary"></i>&nbsp;
-                {{ article.prixUnitaireHt }} FCFA
-              </div>
-              <div class="col-md-12">
-                <i class="fa-solid fa-dollar-sign text-primary"></i>&nbsp;
-                {{ article.prixUnitaireTtc }} FCFA
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 border-2 border-end d-flex justify-content-center align-items-center">
-            <div class="row d-flex justify-content-center align-items-center">
-              <div class="col-md-2 align-times-center">
-                <i class="fa-solid fa-flag-checkered text-primary fs-5"></i>
-              </div>
-              <div class="col-md-10">
-                <div class="row">
-                  <div class="col-md-12">{{ article.categorie?.code}}</div>
-                  <div class="col-md-12">{{ article.categorie?.designation}}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3  d-flex justify-content-center align-items-center">
-        <div class="row  d-flex justify-content-center align-items-center">
-          <div class="col-md-4">
-            <button
-              (click)="onEdit()"
-              type="button"
-              class="btn btn-warning"
-            >
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-          </div>
-          <div class="col-md-4">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#suppressionArticle"
-            >
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </div>
-          <div class="col-md-4">
-            <button
-              (click)="onDetails()"
-              type="button"
-              class="btn btn-primary"
-            >
-              <i class="fa-solid fa-table-list"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+    <h5 class="card-title fs-6 text-nowrap fw-bold mb-1">
+      <i class="fas fa-code text-primary"></i>&nbsp;{{ article.code }}
+    </h5>
+    <h5 class="card-subtitle fs-6 text-secondary mb-1"><i class="fa-solid fa-circle-info text-primary"></i>&nbsp;{{ article.designation }}</h5>
+    <h6 class="card-subtitle fs-6 text-secondary mb-1">
+      <i class="fa-solid fa-dollar-sign text-primary"></i>&nbsp;{{ article.prixUnitaireHt|number }} FCFA
+    </h6>
+    <h6 class="card-subtitle fs-6 text-secondary">
+      <i class="fa-solid fa-dollar-sign text-primary"></i>&nbsp;{{ article.prixUnitaireTtc|number }} FCFA
+    </h6>
+  </div>
+  <div class="card-footer d-flex gap-2 justify-content-between align-items-center">
+    <div class="d-flex gap-2">
+      <button (click)="onEdit()" type="button" class="btn btn-warning btn-sm">
+        <i class="fa-solid fa-pencil"></i>
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#suppressionCategorie"
+        (click)="onDelete()"
+      >
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+      <button
+        (click)="onDetails()"
+        type="button"
+        class="btn btn-primary btn-sm"
+      >
+        <i class="fa-solid fa-table-list"></i>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="suppressionArticle"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Article</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        Etes vous sur de vouloir supprimer cet article?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          <i class="fa-solid fa-ban"></i>&nbsp;Annuler
-        </button>
-        <button
-          type="button"
-          class="btn btn-danger"
-          data-bs-dismiss="modal"
-          (click)="onDelete()"
-        >
-          <i class="fa-solid fa-trash-can"></i>&nbsp;Supprimer
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+

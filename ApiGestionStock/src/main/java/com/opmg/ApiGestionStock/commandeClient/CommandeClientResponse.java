@@ -3,6 +3,7 @@ package com.opmg.ApiGestionStock.commandeClient;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.opmg.ApiGestionStock.client.ClientResponse;
 import com.opmg.ApiGestionStock.common.EtatCommande;
+import com.opmg.ApiGestionStock.ligneCommandeClient.LigneCommandeClientResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,4 +23,5 @@ public class CommandeClientResponse {
     private LocalDate dateCommande;
     private EtatCommande etatCommande;
     private ClientResponse client;
+    private List<LigneCommandeClientResponse> ligneCommandeClients;
 }

@@ -24,8 +24,9 @@ import { ToastService } from '../../../../services/toast/toast.service';
 })
 export class ArticlesComponent implements OnInit {
   articleResponse: PageResponseArticleResponse = {};
+  selectedArticle: ArticleResponse = {};
   page = 0;
-  size = 10;
+  size = 9;
   pages: any = [];
 
   constructor(
@@ -63,8 +64,8 @@ export class ArticlesComponent implements OnInit {
     this.router.navigate(['home', 'articles', 'nouvel-article', article.id]);
   }
 
-  delete(article: ArticleResponse) {
-    this.articleService.deleteArticle(article.id as number).subscribe({
+  onDelete() {
+    this.articleService.deleteArticle(this.selectedArticle.id as number).subscribe({
       next: () => {
         this.toastService.showSuccess("Article supprimé aves success");
         this.findAllArticles();
@@ -73,6 +74,10 @@ export class ArticlesComponent implements OnInit {
         this.toastService.showError(err.error.error);
       },
     });
+  }
+
+  delete(article: ArticleResponse) {
+    this.selectedArticle = article;
   }
 
   details(article: ArticleResponse) {}

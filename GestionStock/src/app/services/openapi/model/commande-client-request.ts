@@ -14,7 +14,17 @@ export interface CommandeClientRequest {
     id?: number;
     code: string;
     dateCommande: string;
+    etatCommande: CommandeClientRequest.EtatCommandeEnum;
     client: number;
     ligneCommandeClients: Array<LigneCommandeClientRequest>;
 }
+export namespace CommandeClientRequest {
+    export type EtatCommandeEnum = 'EN_PREPARATION' | 'VALIDEE' | 'LIVREE';
+    export const EtatCommandeEnum = {
+        EnPreparation: 'EN_PREPARATION' as EtatCommandeEnum,
+        Validee: 'VALIDEE' as EtatCommandeEnum,
+        Livree: 'LIVREE' as EtatCommandeEnum
+    };
+}
+
 

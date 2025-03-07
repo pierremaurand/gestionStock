@@ -1,0 +1,14 @@
+<input type="search" class="form-control" placeholder="{{ placeholder }}" [(ngModel)]="value" (input)="filtrerList()"/>
+<div
+  class="dropdown-menu overflow-auto"
+  style="max-height: 200px;"
+  [class.d-block] = "listeFiltree.length"
+>
+  <div
+    class="dropdown-item"
+    *ngFor="let obj of listeFiltree"
+    (click)="onElementSelected(obj)"
+  >
+    {{ obj.value }}
+  </div>
+</div>

@@ -24,5 +24,6 @@ public class FournisseurResponse {
     private String email;
     private byte[] photo;
     private List<Long> commandeFournisseurs;
+    private String value;
     private AdresseResponse adresse;
 }

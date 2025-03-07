@@ -1,54 +1,64 @@
-<div class="card page">
-  <div class="card-body page-body">
-    <div class="page-header">
-      <div class="row">
-        <div class="col-md-7">
-          <h1 class="h3">Liste des catégories</h1>
-        </div>
-        <div class="col-md-5">
-          <app-bouttons-action
-            (clickEvent)="nouvelleCategorie()"
-          ></app-bouttons-action>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <app-pagination
-          [page]="page"
-          [pages]="pages"
-          [totalPages]="categorieResponse.totalPages"
-          (goToPageEvent)="goToPage($event)"
-        ></app-pagination>
-      </div>
-    </div>
-    <div class="page-content">
-      <app-ligne-categorie
-        *ngFor="let categorie of categorieResponse.content"
-        [categorie]="categorie"
-        (edit)="onEdit($event)"
-        (delete)="onDelete($event)"
-      ></app-ligne-categorie>
-    </div>
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h1 class="h2">Les catégories</h1>
+  <div class="d-flex justify-content-center align-items-center">
+    <app-bouttons-action
+      (clickEvent)="nouvelleCategorie()"
+    ></app-bouttons-action>
   </div>
 </div>
 
-<!-- modal -->
-<div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+<div class="page-content row">
+  <div class="col-md-4 mb-3" *ngFor="let categorie of categorieResponse.content">
+    <app-ligne-categorie
+      [categorie]="categorie"
+      (edit)="onEdit($event)"
+      (delete)="onSelectedCategorie($event)"
+    ></app-ligne-categorie>
+  </div>
+</div>
+<div
+  *ngIf="categorieResponse.totalPages && categorieResponse.totalPages > 1"
+  class="mt-3 d-flex justify-content-center align-items-center"
+>
+  <app-pagination
+    [page]="page"
+    [pages]="pages"
+    [totalPages]="categorieResponse.totalPages"
+    (goToPageEvent)="goToPage($event)"
+  ></app-pagination>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="suppressionCategorie"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Catégorie</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
+        Etes vous sur de vouloir supprimer cette catégorie?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fa-solid fa-ban"></i>&nbsp;Annuler
+        </button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDelete()">
+          <i class="fa-solid fa-trash-can"></i>&nbsp;Supprimer
+        </button>
       </div>
     </div>
   </div>

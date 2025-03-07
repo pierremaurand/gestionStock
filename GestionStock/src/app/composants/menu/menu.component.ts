@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { NgClass, NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgFor } from '@angular/common';
 import { Menu } from './menu';
 
 @Component({
   selector: 'app-menu',
-  imports: [NgFor, NgClass],
+  imports: [NgFor],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })
-export class MenuComponent implements OnInit{
+export class MenuComponent {
   menuProperties: Array<Menu> = [
     {
       id: '1',
@@ -116,10 +116,6 @@ export class MenuComponent implements OnInit{
   private lastSelectedMenu: Menu | undefined;
 
   constructor(private router: Router) {}
-
-  ngOnInit(): void {
-
-  }
 
   navigate(menu: Menu): void {
     if (this.lastSelectedMenu) {

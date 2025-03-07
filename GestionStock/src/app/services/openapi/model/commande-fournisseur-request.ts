@@ -14,7 +14,17 @@ export interface CommandeFournisseurRequest {
     id?: number;
     code: string;
     dateCommande: string;
+    etatCommande: CommandeFournisseurRequest.EtatCommandeEnum;
     fournisseur: number;
     ligneCommandeFournisseurs: Array<LigneCommandeFournisseurRequest>;
 }
+export namespace CommandeFournisseurRequest {
+    export type EtatCommandeEnum = 'EN_PREPARATION' | 'VALIDEE' | 'LIVREE';
+    export const EtatCommandeEnum = {
+        EnPreparation: 'EN_PREPARATION' as EtatCommandeEnum,
+        Validee: 'VALIDEE' as EtatCommandeEnum,
+        Livree: 'LIVREE' as EtatCommandeEnum
+    };
+}
+
 

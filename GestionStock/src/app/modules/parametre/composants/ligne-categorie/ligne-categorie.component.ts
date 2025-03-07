@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CategorieResponse } from '../../../../services/openapi';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ligne-categorie',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './ligne-categorie.component.html',
   styleUrl: './ligne-categorie.component.scss'
 })

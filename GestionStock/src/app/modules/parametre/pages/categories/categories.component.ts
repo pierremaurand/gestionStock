@@ -24,8 +24,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CategoriesComponent implements OnInit {
   categorieResponse: PageResponseCategorieResponse = {};
+  selectedCategorie: CategorieResponse = {};
   page = 0;
-  size = 10;
+  size = 9;
   pages: any = [];
 
   constructor(
@@ -70,8 +71,12 @@ export class CategoriesComponent implements OnInit {
 
   onDetails(categorie: CategorieResponse) {}
 
-  onDelete(categorie: CategorieResponse) {
-    this.categorieService.deleteCategorie(categorie.id as number).subscribe({
+  onSelectedCategorie(categorie: CategorieResponse) {
+    this.selectedCategorie = categorie;
+  }
+
+  onDelete() {
+    this.categorieService.deleteCategorie(this.selectedCategorie.id as number).subscribe({
       next: () => {
         this.toastr.success("Catégorie supprimer avec success","Success");
         this.findAllCategories();

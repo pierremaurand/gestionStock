@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LigneCommandeFournisseurMapper {
     private final ArticleMapper articleMapper;
-    private final CommandeFournisseurMapper commandeFournisseurMapper;
 
     public LigneCommandeFournisseur toLigneCommandeFournisseur(LigneCommandeFournisseurRequest request){
         return LigneCommandeFournisseur.builder()
@@ -25,7 +24,6 @@ public class LigneCommandeFournisseurMapper {
                 .quantite(ligneCommandeFournisseur.getQuantite())
                 .prixUnitaire(ligneCommandeFournisseur.getPrixUnitaire())
                 .article(articleMapper.toArticleResponse(ligneCommandeFournisseur.getArticle()))
-                .commandeFournisseur(commandeFournisseurMapper.toCommandeFournisseurResponse(ligneCommandeFournisseur.getCommandeFournisseur()))
                 .build();
     }
 }

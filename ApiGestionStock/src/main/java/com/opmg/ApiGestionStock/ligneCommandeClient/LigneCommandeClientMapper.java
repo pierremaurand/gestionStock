@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LigneCommandeClientMapper {
     private final ArticleMapper articleMapper;
-    private final CommandeClientMapper commandeClientMapper;
 
     public LigneCommandeClient toLigneCommandeClient(LigneCommandeClientRequest request){
         return LigneCommandeClient.builder()
@@ -25,7 +24,6 @@ public class LigneCommandeClientMapper {
                 .quantite(ligneCommandeClient.getQuantite())
                 .prixUnitaire(ligneCommandeClient.getPrixUnitaire())
                 .article(articleMapper.toArticleResponse(ligneCommandeClient.getArticle()))
-                .commandeClient(commandeClientMapper.toCommandeClientResponse(ligneCommandeClient.getCommandeClient()))
                 .build();
     }
 }

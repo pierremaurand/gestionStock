@@ -32,6 +32,7 @@ public class FournisseurMapper {
                 .email(fournisseur.getEmail())
                 .photo(FileUtils.readFileFromLocation(fournisseur.getPhoto()))
                 .adresse(adresseMapper.toAdresseResponse(fournisseur.getAdresse()))
+                .value(fournisseur.getNom())
                 .build();
     }
 }

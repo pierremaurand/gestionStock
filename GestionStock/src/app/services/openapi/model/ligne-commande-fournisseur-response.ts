@@ -8,7 +8,6 @@
  * Do not edit the class manually.
  */
 import { ArticleResponse } from './article-response';
-import { CommandeFournisseurResponse } from './commande-fournisseur-response';
 
 
 export interface LigneCommandeFournisseurResponse { 
@@ -16,6 +15,5 @@ export interface LigneCommandeFournisseurResponse {
     article?: ArticleResponse;
     quantite?: number;
     prixUnitaire?: number;
-    commandeFournisseur?: CommandeFournisseurResponse;
 }
 

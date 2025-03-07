@@ -18,6 +18,7 @@ export interface ArticleResponse {
     tauxTva?: number;
     prixUnitaireTtc?: number;
     categorie?: CategorieResponse;
+    value?: string;
     photo?: string;
 }
 

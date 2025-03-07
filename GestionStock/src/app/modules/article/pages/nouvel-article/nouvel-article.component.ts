@@ -1,3 +1,4 @@
+import { AutocompleteComponent } from './../../../../composants/autocomplete/autocomplete.component';
 import { ToastService } from './../../../../services/toast/toast.service';
 import { ArticleRequest } from './../../../../services/openapi/model/article-request';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nouvel-article',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AutocompleteComponent],
   templateUrl: './nouvel-article.component.html',
   styleUrl: './nouvel-article.component.scss',
 })
@@ -22,9 +23,9 @@ export class NouvelArticleComponent implements OnInit {
   selectedArticlePhoto: any;
   selectedPhoto: string | undefined;
   prixUnitaireTTC: string = '';
-  codeCategorie: string = '';
-  selectedCategorie: CategorieResponse = {};
-  categorieNotYetSelected = false;
+  categorie: CategorieResponse = {};
+  categorieValue: string = '';
+  categorieLabel: string = 'Selectionner une catégorie';
 
   constructor(
     private router: Router,
@@ -44,15 +45,14 @@ export class NouvelArticleComponent implements OnInit {
             code: article.code as string,
             designation: article.designation as string,
             prixUnitaireHt: article.prixUnitaireHt as number,
-            tauxTva: article.tauxTva as number,
-            categorie: article.categorie?.id as number,
+            tauxTva: article.tauxTva as number
           };
+          this.categorie = article.categorie??{};
+          this.categorieValue = this.categorie.value??'';
           if (article.photo) {
             this.selectedPhoto = 'data:image/jpg;base64,' + article.photo;
           }
-          this.prixUnitaireTTC = article.prixUnitaireTtc
-            ? article.prixUnitaireTtc.toString()
-            : '';
+          this.prixUnitaireTTC = article.prixUnitaireTtc?.toString()??'';
         },
       });
     } else {
@@ -63,19 +63,9 @@ export class NouvelArticleComponent implements OnInit {
     this.findAllCategories();
   }
 
-  selectCategorieClick(categorie: CategorieResponse) {
-
-  }
-
-  filterCategorie(): void {
-    if (this.codeCategorie.length === 0) {
-      this.findAllCategories();
-    }
-    this.categories = this.categories.filter(
-      (cat) =>
-        cat.code?.includes(this.codeCategorie) ||
-        cat.designation?.includes(this.codeCategorie)
-    );
+  onCategorieSelected(categorie: CategorieResponse) {
+    this.categorie = categorie;
+    this.categorieValue = categorie.value??'';
   }
 
   generateCode(): string {
@@ -104,6 +94,7 @@ export class NouvelArticleComponent implements OnInit {
   }
 
   saveArticle(): void {
+    this.articleRequest.categorie = this.categorie.id;
     this.articleService
       .saveArticle(this.articleRequest as ArticleRequest)
       .subscribe({

@@ -1,0 +1,116 @@
+<div class="card">
+  <div
+    class="card-header bg-transparent accordion-header"
+    id="commande{{ commande.id }}"
+  >
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-2 border-2 border-end text-center">
+            <img [src]="clientPhoto" class="w-100" alt="images-article" />
+          </div>
+          <div
+            class="col-md-7 d-flex justify-content-center align-items-center"
+          >
+            <div class="row h-100">
+              <div
+                class="col-md-6 border-2 border-end d-flex justify-content-center align-items-center"
+              >
+                <div class="row">
+                  <div class="col-md-12">
+                    <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
+                    {{ commande.client?.nom }}
+                  </div>
+                  <div class="col-md-12">
+                    <i class="fa-solid fa-circle-info text-primary"></i>&nbsp;
+                    {{ commande.client?.sexe }}
+                  </div>
+                  <div class="col-md-12">
+                    <i class="fa-solid fa-square-phone text-primary"></i>&nbsp;
+                    {{ commande.client?.numeroTel }}
+                  </div>
+                  <div class="col-md-12">
+                    <i class="fa-solid fa-at text-primary"></i>&nbsp;
+                    {{ commande.client?.email }}
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-6 border-2 border-end d-flex justify-content-center align-items-center"
+              >
+                <div class="row">
+                  <div class="col-md-12">
+                    <i class="fa-solid fa-qrcode text-primary"></i>&nbsp;
+                    {{ commande.code }}
+                  </div>
+                  <div class="col-md-12">
+                    <i class="fa-solid fa-calendar-check text-primary"></i
+                    >&nbsp; {{ commande.dateCommande }}
+                  </div>
+                  <div class="col-md-12">
+                    <i class="fa-solid fa-cart-arrow-down text-primary"></i
+                    >&nbsp; {{ commande.etatCommande }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-3 d-flex justify-content-center align-items-center"
+          >
+            <div class="row">
+              <div class="col-md-4 d-flex align-items-center">
+                <button type="button" class="btn btn-warning btn-sm">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+              </div>
+              <div class="col-md-4 d-flex align-items-center">
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  [attr.aria-controls]="'collapseOne'"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="collapseOne"
+    class="accordion-collapse collapse card-body"
+    aria-labelledby="headingOne"
+    data-bs-parent="#accordionExample"
+  >
+    <div class="accordion-body">
+      <app-ligne-commande-client-fournisseur
+        *ngFor="let ligneCommande of commande.ligneCommandeClients"
+        [ligneCommande]="ligneCommande"
+      ></app-ligne-commande-client-fournisseur>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-md-6 text-start h5">
+        {{ nbrLignes }} article commandés
+      </div>
+      <div class="col-md-6 text-end h5">
+        Total commande: {{ totalCommande }}
+      </div>
+    </div>
+  </div>
+</div>

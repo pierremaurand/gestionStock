@@ -20,5 +20,6 @@ public class ArticleResponse {
     private Double tauxTva;
     private Double prixUnitaireTtc;
     private CategorieResponse categorie;
+    private String value;
     private byte[] photo;
 }

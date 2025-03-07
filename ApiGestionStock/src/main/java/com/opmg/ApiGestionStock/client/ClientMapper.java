@@ -32,6 +32,7 @@ public class ClientMapper {
                 .email(client.getEmail())
                 .photo(FileUtils.readFileFromLocation(client.getPhoto()))
                 .adresse(adresseMapper.toAdresseResponse(client.getAdresse()))
+                .value(client.getNom())
                 .build();
     }
 }

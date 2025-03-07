@@ -1,104 +1,98 @@
-<div class="card page">
-  <div class="card-body page-body">
-    <div class="page-header">
-      <div class="row">
-        <div class="col-md-7">
-          <h1 class="h3">Mouvements des stocks</h1>
-        </div>
-        <div class="col-md-5 actions text-end">
-          <app-bouttons-action
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h1 class="h2">Les mouvements des stocks</h1>
+  <div class="d-flex justity-content-center align-items-center">
+    <app-bouttons-action
             [isNouveauVisible]="false"
             [isImporterVisible]="false"
           ></app-bouttons-action>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <app-pagination
-          [page]="page"
-          [pages]="pages"
-          [totalPages]="articleResponse.totalPages"
-          (goToPageEvent)="goToPage($event)"
-        ></app-pagination>
-      </div>
-    </div>
-    <div class="accordion" id="accordionArticle">
-      <div class="accordion-item mb-1"  *ngFor="let article of articleResponse.content">
-        <app-ligne-mouvement-stock
-        [article]="article"
-        (correctStock)="onCorrectStockClicked($event)"
-        [mouvements]="mouvements"
-      ></app-ligne-mouvement-stock>
-      </div>
-    </div>
+  </div>
+</div>
 
-    <div
-      class="modal fade"
-      id="correctionStockModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Correction de stock
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+<div class="page-content accordion" id="accordionArticle">
+  <div class="accordion-item mb-1"  *ngFor="let article of articleResponse.content">
+    <app-ligne-mouvement-stock
+    [article]="article"
+    (correctStock)="onCorrectStockClicked($event)"
+    [mouvements]="mouvements"
+  ></app-ligne-mouvement-stock>
+  </div>
+</div>
+
+<div *ngIf="articleResponse.totalPages && articleResponse.totalPages > 1" class="mt-3 d-flex justify-content-center align-items-center">
+  <app-pagination
+      [page]="page"
+      [pages]="pages"
+      [totalPages]="articleResponse.totalPages"
+      (goToPageEvent)="goToPage($event)"
+    ></app-pagination>
+</div>
+
+<div
+  class="modal fade"
+  id="correctionStockModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Correction de stock
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-3 text-center">
+            <i class="fa-brands fa-stack-overflow fs-1 text-primary"></i>
           </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-3 text-center">
-                <i class="fa-brands fa-stack-overflow fs-1 text-primary"></i>
+          <div class="col-md-9">
+            <form>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="quantite"
+                  name="quantite"
+                  placeholder="Quantité"
+                  [(ngModel)]="nouveauMouvement.quantite"
+                />
               </div>
-              <div class="col-md-9">
-                <form>
-                  <div class="mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="quantite"
-                      name="quantite"
-                      placeholder="Quantité"
-                      [(ngModel)]="nouveauMouvement.quantite"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <select
-                      name="typeMouvement"
-                      id="typeMouvement"
-                      class="form-select"
-                      [(ngModel)]="nouveauMouvement.typeMouvement"
-                    >
-                      <option value="">Choisir le type de correction</option>
-                      <option value="CORRECTION_POS">CORRECTION POSITIVE</option>
-                      <option value="CORRECTION_NEG">CORRECTION NEGATIVE</option>
-                    </select>
-                  </div>
-                </form>
+              <div class="mb-3">
+                <select
+                  name="typeMouvement"
+                  id="typeMouvement"
+                  class="form-select"
+                  [(ngModel)]="nouveauMouvement.typeMouvement"
+                >
+                  <option value="">Choisir le type de correction</option>
+                  <option value="CORRECTION_POS">CORRECTION POSITIVE</option>
+                  <option value="CORRECTION_NEG">CORRECTION NEGATIVE</option>
+                </select>
               </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-            >
-              <i class="fa-solid fa-ban"></i>&nbsp; Annuler
-            </button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveMouvement()">
-              <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
-            </button>
+            </form>
           </div>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-ban"></i>&nbsp; Annuler
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveMouvement()">
+          <i class="fa-solid fa-floppy-disk"></i>&nbsp; Enregistrer
+        </button>
       </div>
     </div>
   </div>

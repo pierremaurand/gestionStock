@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ArticleResponse } from '../../../../services/openapi';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-ligne-article',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './ligne-article.component.html',
   styleUrl: './ligne-article.component.scss'
 })
