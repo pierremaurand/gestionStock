@@ -7,11 +7,11 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'home',
@@ -21,28 +21,39 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
+        loadChildren: () =>
+          import('./modules/home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'articles',
-        loadChildren: () => import('./modules/article/article.module').then(m => m.ArticleModule)
+        loadChildren: () =>
+          import('./modules/article/article.module').then(
+            (m) => m.ArticleModule
+          ),
       },
       {
         path: 'clients',
-        loadChildren: () => import('./modules/client/client.module').then(m => m.ClientModule)
+        loadChildren: () =>
+          import('./modules/client/client.module').then((m) => m.ClientModule),
       },
       {
         path: 'fournisseurs',
-        loadChildren: () => import('./modules/fournisseur/fournisseur.module').then(m => m.FournisseurModule)
+        loadChildren: () =>
+          import('./modules/fournisseur/fournisseur.module').then(
+            (m) => m.FournisseurModule
+          ),
       },
       {
         path: 'parametres',
-        loadChildren: () => import('./modules/parametre/parametre.module').then(m => m.ParametreModule)
-      }
-    ]
-  }
+        loadChildren: () =>
+          import('./modules/parametre/parametre.module').then(
+            (m) => m.ParametreModule
+          ),
+      },
+    ],
+  },
 ];
