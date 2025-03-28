@@ -1,29 +1,33 @@
-import { ToastService } from './../../services/toast/toast.service';
+import { ToastService } from '../../../services/toast/toast.service';
 import { Component } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TokenService } from '../../services/token/token.service';
-import { AuthenticationRequest, AuthenticationResponse, AuthenticationService, UtilisateurResponse } from '../../services/openapi';
+import { TokenService } from '../../../services/token/token.service';
+import {
+  AuthenticationRequest,
+  AuthenticationResponse,
+  AuthenticationService,
+  UtilisateurResponse,
+} from '../../../services/openapi';
 
 @Component({
   selector: 'app-login',
   imports: [FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
-export class LoginComponent {
-  authRequest: AuthenticationRequest = {login: "", motDePasse: ""};
+export default class LoginComponent {
+  authRequest: AuthenticationRequest = { login: '', motDePasse: '' };
 
   constructor(
     private router: Router,
     private authService: AuthenticationService,
     private tokenService: TokenService,
     private toastService: ToastService
-  ){}
+  ) {}
 
   login(): void {
-    this.authService.login(this.authRequest)
-    .subscribe({
+    this.authService.login(this.authRequest).subscribe({
       next: (res: AuthenticationResponse) => {
         this.tokenService.token = res.token as string;
         this.tokenService.utilisateur = res.utilisateur as UtilisateurResponse;
@@ -38,7 +42,7 @@ export class LoginComponent {
         } else {
           this.toastService.showError(err.error.error);
         }
-      }
-    })
+      },
+    });
   }
 }

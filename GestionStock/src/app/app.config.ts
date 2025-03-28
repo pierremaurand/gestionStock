@@ -14,10 +14,11 @@ import {
 import { httpTokenInterceptor } from './services/interceptor/http-token.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { provideServerRendering } from '@angular/platform-server';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations(),
+    provideServerRendering(),
     provideToastr({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,

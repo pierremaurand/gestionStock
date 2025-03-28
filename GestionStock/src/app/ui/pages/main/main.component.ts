@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Menu } from '../../composants/menu/menu';
+import { Menu } from '../../../composants/menu/menu';
 import { CommonModule } from '@angular/common';
-import { MenuComponent } from '../../composants/menu/menu.component';
+import { MenuComponent } from '../../../composants/menu/menu.component';
 
 @Component({
   selector: 'app-main',
@@ -10,7 +10,7 @@ import { MenuComponent } from '../../composants/menu/menu.component';
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
-export class MainComponent {
+export default class MainComponent {
   mainMenus: Array<Menu> = [
     {
       id: '1',
